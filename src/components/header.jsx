@@ -31,7 +31,7 @@ function Header({reference,click,loggedUser,history}) {
                   <li>
                     <div className="mu-telephone">
               
-                     <Link to="/vendor"> <span>Become a vendor</span></Link>
+                     <Link to="/Vendor"> <span>Become a vendor</span></Link>
                     </div>
                   </li>
                   <li>

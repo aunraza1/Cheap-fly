@@ -1,5 +1,5 @@
 import firebase from '../../config/firebase'
-
+import {storage} from '../../config/firebase'
 
 
 
@@ -123,8 +123,56 @@ emails.map((v,i)=>{
 }
 
 
+const addCar=(data)=>{    
+
+
+ 
+    const uploadImage=storage.ref('Images/'+data.hotelImage.name).put(data.hotelImage)
+    uploadImage.on("state_changed", snapshot=>{},error=>{
+        alert(error)
+    },()=>
+    
+    storage.ref("Images").child(data.hotelImage.name).getDownloadURL().then(url=>{
+    
+        let key =firebase.database().ref('/Cars').push().key
+    
+    
+         
+    firebase.database().ref('/Cars'+key).set(data,(err)=>{
+    if(err){
+        console.log("Error Occured!")
+    }
+    else{
+        alert("Success! Hotel Added")
+        window.location.reload()
+    }
+    })
+     
+   
+    
+    let newData={
+        key:key,
+        url:url
+        
+    
+    }
+    
+    var query=firebase.database().ref('/Cars').orderByKey().equalTo(key)
+    query.on("child_added",(snapshot)=>{
+        snapshot.ref.update(newData)
+    })
+    })
+    )
+    
+    
+    
+   
+    
+    }
+
 export {
 
     userSignup,
-    signin
+    signin,
+    addCar
 }
