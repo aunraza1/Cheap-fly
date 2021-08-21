@@ -1,12 +1,13 @@
 import React from 'react'
 import '../../../assets/style.css'
 import {useState,useEffect} from 'react'
+import {connect} from 'react-redux'
+import {registerHotel} from '../../../store/actions/index'
 
+function HotelBooking({registerHotel}){
 
-function HotelBooking(){
     const [hotelDetails,sethotelDetails]=useState({
         hotelName:"",
-        roomType:[],
         singlePrice:"",
         doublePrice:"",
         kingPrice:"",
@@ -16,26 +17,19 @@ function HotelBooking(){
         hotelImage:"",
     })
 
-    useEffect(()=>{
-        console.log(hotelDetails)
-    })
+  
 
-    const handleChange=(e)=>{
-        if(e.target.checked){
-           sethotelDetails({...hotelDetails,roomType:[...hotelDetails.roomType,e.target.value]})
-        }
-        else {
-         var index= hotelDetails.roomType.indexOf(e.target.value)
-         hotelDetails.roomType.splice(index,1)
-        
-        }
-        
-        }
+const sendData=(e)=>{
+    e.preventDefault()
+    registerHotel(hotelDetails)
+
+}
+    
 
     return(
         <>
         <div>
-      <div id="booking" className="section">
+         <div id="booking" className="section">
          <div className="section-center">
            <div className="container">
              <div className="row">
@@ -43,7 +37,7 @@ function HotelBooking(){
                  <div className="form-header">
                    <h1>Hotel Details</h1>
                  </div>
-                 <form>
+                 <form onSubmit={sendData}>
                    <div className="row">
                      <div className="col-sm-6">
                        <div className="form-group">
@@ -51,16 +45,7 @@ function HotelBooking(){
                          <input onChange={(e)=>sethotelDetails({...hotelDetails,hotelName:e.target.value})} className="form-control" type="text" placeholder="Hotel Name" />
                        </div>
                      </div>
-                     <div className="col-sm-6">
-                       <div className="form-group">
-                         <span className="form-label">Room Type</span>
-        <input type="checkbox" onChange={(e)=>handleChange(e)} value="SingleRoom"/>  <span style={{color:"white",fontSize:'15px',marginLeft:'2px'}} > Single</span>
-        <input type="checkbox" onChange={(e)=>handleChange(e)} value="Double Room"/> <span style={{color:"white",fontSize:'15px',marginLeft:'2px'}} > Double</span>
-        <input type="checkbox" onChange={(e)=>handleChange(e)} value="King Room" /> <span style={{color:"white",fontSize:'15px',marginLeft:'2px'}} > King</span>
-        <input type="checkbox"onChange={(e)=>handleChange(e)} value="Queen Room" /> <span style={{color:"white",fontSize:'15px',marginLeft:'2px'}} > Queen</span>
-       
-                       </div>
-                     </div>
+                   
                    </div>
 
                    <div className="row">
@@ -118,8 +103,8 @@ function HotelBooking(){
                      </div>
                    
                    </div>
-                   <div className="form-btn">
-                     <button className="submit-btn">Add Hotel</button>
+                   <div >
+                     <button type="submit" >Add Hotel</button>
                    </div>
                  </form>
                </div>
@@ -133,4 +118,10 @@ function HotelBooking(){
     )
 
 }
-export default HotelBooking
+
+
+const mapDispatchToProps=(dispatch)=>({
+    registerHotel:(obj)=>dispatch(registerHotel(obj))
+
+})
+export default connect(null,mapDispatchToProps) (HotelBooking)

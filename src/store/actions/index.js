@@ -170,9 +170,59 @@ const addCar=(data)=>{
     
     }
 
+    const registerHotel=(data)=>{
+        return(dispatch)=>{
+            console.log(data)
+
+
+            const uploadImage=storage.ref('Images/'+data.hotelImage.name).put(data.hotelImage)
+    uploadImage.on("state_changed", snapshot=>{},error=>{
+        alert(error)
+    },()=>
+    
+    storage.ref("Images").child(data.hotelImage.name).getDownloadURL().then(url=>{
+    
+        let key =firebase.database().ref('/Hotels').push().key
+    
+    
+         
+    firebase.database().ref('/Hotels/'+key).set(data,(err)=>{
+    if(err){
+        console.log("Error Occured!")
+    }
+    else{
+        alert("Success! Hotel Added")
+       
+    }
+    })
+     
+   
+    
+    let newData={
+        key:key,
+        url:url
+        
+    
+    }
+    
+    var query=firebase.database().ref('/Hotels').orderByKey().equalTo(key)
+    query.on("child_added",(snapshot)=>{
+        snapshot.ref.update(newData)
+    })
+    })
+    )
+    
+    
+
+        }
+
+
+    }
+
 export {
 
     userSignup,
     signin,
-    addCar
+    addCar,
+    registerHotel
 }
