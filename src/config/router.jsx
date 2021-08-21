@@ -6,6 +6,7 @@ import FlightBookings from "../FlightBookings";
 import Signup from '../components/signup'
 import Login from '../components/login'
 import VendorTab from '../components/VendorTab'
+import HotelBooking from "../components/hotelBooking";
 
 
 
@@ -20,6 +21,7 @@ import VendorTab from '../components/VendorTab'
                 <Route exact path="/Signup" component={Signup}></Route>
                 <Route exact path="/Signin" component={Login}></Route>
                 <Route exact path="/Vendor" component={VendorTab}></Route>
+                <Route exact path="/hotelBooking" component={HotelBooking}></Route>
                
             </Router>
       )

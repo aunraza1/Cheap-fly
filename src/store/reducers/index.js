@@ -1,6 +1,8 @@
-const INITIAL_STATE = {
-    loggedUser: "",
-    carData: []
+const INITIAL_STATE={
+    loggedUser:"",
+    hotelData:"",
+    carData: [],
+
 }
 
 
@@ -20,6 +22,12 @@ export default (state = INITIAL_STATE, action) => {
                 carData: action.payload,
             };
 
+        case "GET_HOTELS" :
+            
+        return({
+            ...state,hotelData:action.data
+        })
+        
         default:
             return state
     }

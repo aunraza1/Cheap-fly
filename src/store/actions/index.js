@@ -228,6 +228,23 @@ const carFetch = (dispatch) => {
         dispatch({type: 'ADD_CAR_DATA', payload: carData})
     });
 }
+    
+    const getHotelsfromVendors=()=>{
+        return(dispatch)=>{
+        var hotelData=[];
+        firebase.database().ref('/Hotels').once('value',(snapshot)=>{
+            snapshot.forEach((child)=>{
+                hotelData.push(child.val())
+
+            })
+            dispatch({type:"GET_HOTELS" ,data:hotelData})
+            console.log(hotelData)
+        })
+
+        }
+   
+
+    }
 
 export {
 
@@ -235,5 +252,6 @@ export {
     signin,
     addCar,
     registerHotel,
-    carFetch
+    carFetch,
+    getHotelsfromVendors
 }
