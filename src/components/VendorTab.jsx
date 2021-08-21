@@ -28,7 +28,7 @@ function VendorTab (){
     </Paper>
     {value==0?<HotelBooking/>:<CarBooking/>}
    
-  );
+  
         </>
     )
 
