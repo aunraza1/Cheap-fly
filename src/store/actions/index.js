@@ -219,10 +219,29 @@ const addCar=(data)=>{
 
     }
 
+    
+    const getHotelsfromVendors=()=>{
+        return(dispatch)=>{
+        var hotelData=[];
+        firebase.database().ref('/Hotels').once('value',(snapshot)=>{
+            snapshot.forEach((child)=>{
+                hotelData.push(child.val())
+
+            })
+            dispatch({type:"GET_HOTELS" ,data:hotelData})
+            console.log(hotelData)
+        })
+
+        }
+   
+
+    }
+
 export {
 
     userSignup,
     signin,
     addCar,
-    registerHotel
+    registerHotel,
+    getHotelsfromVendors
 }

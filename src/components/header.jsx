@@ -57,7 +57,7 @@ function Header({reference,click,loggedUser,history}) {
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque ut omnis beatae quam quibusdam facere expedita explicabo eaque non sit. Amet vitae exercitationem ad rerum consequuntur numquam magni nemo dolorem, itaque eius perferendis praesentium consequatur. Dolores, nihil, molestiae sunt tenetur aut similique nostrum deleniti amet minima. Esse magnam inventore, ea.</p>
                 <Link  to="Flights" className="mu-book-now-btn">Lets Fly Cheap! </Link>
                 <Link  to='bookcar'  className="mu-book-now-btn">Book Your Car!</Link>
-                <Link   className="mu-book-now-btn">Need a place to saty ?!</Link> 
+                <Link to="hotelBooking"  className="mu-book-now-btn">Need a place to saty ?!</Link> 
                 <Link onClick={click} className="mu-book-now-btn">Bored ? Come Enjoy with us !</Link>
                 <div className="mu-scrolldown-area">
                   <a href="#mu-about" className="mu-scrolldown" id="mu-scrolldown"><i className="fa fa-chevron-down" aria-hidden="true" /></a>

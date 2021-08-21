@@ -1,5 +1,6 @@
 const INITIAL_STATE={
-    loggedUser:""
+    loggedUser:"",
+    hotelData:""
 
 }
 
@@ -14,6 +15,11 @@ export default(state=INITIAL_STATE,action)=>{
             }
                 
             )
+        case "GET_HOTELS" :
+            
+        return({
+            ...state,hotelData:action.data
+        })
         
         default:
             return state
