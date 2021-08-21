@@ -144,7 +144,7 @@ const addCar=(data)=>{
     }
     else{
         alert("Success! Hotel Added")
-        window.location.reload()
+    
     }
     })
      
