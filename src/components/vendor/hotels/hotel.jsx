@@ -1,12 +1,135 @@
 import React from 'react'
-function HotelBooking(){
+import '../../../assets/style.css'
+import {useState,useEffect} from 'react'
 
+
+function HotelBooking(){
+    const [hotelDetails,sethotelDetails]=useState({
+        hotelName:"",
+        roomType:[],
+        singlePrice:"",
+        doublePrice:"",
+        kingPrice:"",
+        queenPrice:"",
+        hotelLocation:"",
+        hotelRatings:"",
+        hotelImage:"",
+    })
+
+    useEffect(()=>{
+        console.log(hotelDetails)
+    })
+
+    const handleChange=(e)=>{
+        if(e.target.checked){
+           sethotelDetails({...hotelDetails,roomType:[...hotelDetails.roomType,e.target.value]})
+        }
+        else {
+         var index= hotelDetails.roomType.indexOf(e.target.value)
+         hotelDetails.roomType.splice(index,1)
+        
+        }
+        
+        }
 
     return(
-            <h1>
-            Hotel Booking 
-            </h1>
-     
+        <>
+        <div>
+      <div id="booking" className="section">
+         <div className="section-center">
+           <div className="container">
+             <div className="row">
+               <div className="booking-form">
+                 <div className="form-header">
+                   <h1>Hotel Details</h1>
+                 </div>
+                 <form>
+                   <div className="row">
+                     <div className="col-sm-6">
+                       <div className="form-group">
+                         <span className="form-label">Hotel Name</span>
+                         <input onChange={(e)=>sethotelDetails({...hotelDetails,hotelName:e.target.value})} className="form-control" type="text" placeholder="Hotel Name" />
+                       </div>
+                     </div>
+                     <div className="col-sm-6">
+                       <div className="form-group">
+                         <span className="form-label">Room Type</span>
+        <input type="checkbox" onChange={(e)=>handleChange(e)} value="SingleRoom"/>  <span style={{color:"white",fontSize:'15px',marginLeft:'2px'}} > Single</span>
+        <input type="checkbox" onChange={(e)=>handleChange(e)} value="Double Room"/> <span style={{color:"white",fontSize:'15px',marginLeft:'2px'}} > Double</span>
+        <input type="checkbox" onChange={(e)=>handleChange(e)} value="King Room" /> <span style={{color:"white",fontSize:'15px',marginLeft:'2px'}} > King</span>
+        <input type="checkbox"onChange={(e)=>handleChange(e)} value="Queen Room" /> <span style={{color:"white",fontSize:'15px',marginLeft:'2px'}} > Queen</span>
+       
+                       </div>
+                     </div>
+                   </div>
+
+                   <div className="row">
+                   <div className="col-sm-3">
+                   <div className="form-group">
+                     <span className="form-label">Single Price</span>
+                     <input onChange={(e)=>sethotelDetails({...hotelDetails,singlePrice:e.target.value})} className="form-control" type="number" placeholder="Single Room " />
+                   </div>
+                   </div>
+                   <div className="col-sm-3">
+                   <div className="form-group">
+                     <span className="form-label">Double  Price</span>
+                     <input onChange={(e)=>sethotelDetails({...hotelDetails,doublePrice:e.target.value})} className="form-control" type="number" placeholder="Double Room " />
+                   </div>
+                   </div>
+                   <div className="col-sm-3">
+                   <div className="form-group">
+                     <span className="form-label">King Price</span>
+                     <input onChange={(e)=>sethotelDetails({...hotelDetails,kingPrice:e.target.value})} className="form-control" type="number" placeholder="King Room " />
+                   </div>
+                   </div>
+                   <div className="col-sm-3">
+                   <div className="form-group">
+                     <span className="form-label">Queen  Price</span>
+                     <input onChange={(e)=>sethotelDetails({...hotelDetails,queenPrice:e.target.value})} className="form-control" type="number" placeholder="Queen Room " />
+                   </div>
+                   </div>
+                   </div>
+
+
+
+                   <div className="row">
+                   <div className="col-sm-6">
+                   <div className="form-group">
+                     <span className="form-label">Location</span>
+                     <input onChange={(e)=>sethotelDetails({...hotelDetails,hotelLocation:e.target.value})} className="form-control" type="text" placeholder="Location" />
+                   </div>
+                   </div>
+                   <div className="col-sm-6">
+                   <div className="form-group">
+                     <span className="form-label">Ratings</span>
+                     <input onChange={(e)=>sethotelDetails({...hotelDetails,hotelRatings:e.target.value})} className="form-control" type="number" placeholder="Ratings" />
+                   </div>
+                   </div>
+                
+                 
+                   </div>
+                
+                   <div className="row">
+                     <div className="col-sm-12">
+                       <div className="form-group">
+                         <span className="form-label">Hotel Image</span>
+                         <input type="file" onChange={(e)=>e.target.files[0]?sethotelDetails({...hotelDetails,hotelImage:e.target.files[0]}):alert("Image not Selected!")} className="form-control"  required />
+                       </div>
+                     </div>
+                   
+                   </div>
+                   <div className="form-btn">
+                     <button className="submit-btn">Add Hotel</button>
+                   </div>
+                 </form>
+               </div>
+             </div>
+           </div>
+         </div>
+       </div>
+       </div>
+ 
+         </>
     )
 
 }
