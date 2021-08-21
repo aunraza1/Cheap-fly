@@ -1,8 +1,9 @@
 
 import '../assets/style.css'
 import {Link} from 'react-router-dom'
+import {connect} from 'react-redux'
 
-function Header({reference,click}) {
+function Header({reference,click,loggedUser,history}) {
 
   console.log(click)
   return (
@@ -24,12 +25,13 @@ function Header({reference,click}) {
                 <ul>
                   <li>
                     <i className="fa fa-envelope" aria-hidden="true" />
-                    <span>Aun.Raza@gmail.com</span>
+                    <span>{loggedUser!=""?loggedUser:"Please Login"}</span>
                   </li>
+                 
                   <li>
                     <div className="mu-telephone">
               
-                      <span>+92-323-2970705</span>
+                     <Link to="/vendor"> <span>Become a vendor</span></Link>
                     </div>
                   </li>
                   <li>
@@ -70,4 +72,11 @@ function Header({reference,click}) {
   );
 }
 
-export default Header;
+
+const mapStateToProps=(state)=>({
+  loggedUser:state.loggedUser
+
+})
+
+export default  connect(mapStateToProps,null)(Header);
+

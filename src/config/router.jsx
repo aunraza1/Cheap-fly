@@ -5,6 +5,7 @@ import CarBooking from "../CarBooking";
 import FlightBookings from "../FlightBookings";
 import Signup from '../components/signup'
 import Login from '../components/login'
+import VendorTab from '../components/VendorTab'
 
 
 
@@ -18,6 +19,8 @@ import Login from '../components/login'
                 <Route exact path="/flights" component={FlightBookings}></Route>
                 <Route exact path="/Signup" component={Signup}></Route>
                 <Route exact path="/Signin" component={Login}></Route>
+                <Route exact path="/Vendor" component={VendorTab}></Route>
+               
             </Router>
       )
 
