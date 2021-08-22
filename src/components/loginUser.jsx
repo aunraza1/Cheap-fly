@@ -26,7 +26,7 @@ function Login({signin}){
         <>
          <div id="login-box">
         <div className="left">
-          <h1>Login</h1>
+          <h1>User</h1>
         
           <input value ={email}onChange={(e)=>setEmail(e.target.value)} type="text" name="email" placeholder="E-mail" />
           <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" name="password" placeholder="Password" />

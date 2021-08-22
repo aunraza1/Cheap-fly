@@ -1,10 +1,9 @@
 import '../assets/style.css'
 import {useState} from 'react'
-import {connect} from 'react-redux'
-import {userSignup} from '../store/actions/index'
+import {VendorSignup} from '../config/api'
 
 
-function SignUp({userSignup}){
+function SignUpVendor(){
 
     const [userName,setName]=useState("")
     const [email,setEmail]=useState("")   
@@ -21,7 +20,7 @@ function SignUp({userSignup}){
             
 
             
-           userSignup(userName,email,password,(data)=>setName(data),(data)=>setEmail(data),(data)=>setPassword(data),(data)=>setRePass(data))
+                VendorSignup(userName,email,password,(data)=>setName(data),(data)=>setEmail(data),(data)=>setPassword(data),(data)=>setRePass(data))
          
         }
         else{
@@ -42,7 +41,7 @@ function SignUp({userSignup}){
         
         <div id="login-box">
         <div className="left">
-          <h1>User</h1>
+          <h1>Vendor</h1>
           <input value={userName} onChange={(e)=>setName(e.target.value)} type="text" name="username" placeholder="Username" />
           <input value ={email}onChange={(e)=>setEmail(e.target.value)} type="text" name="email" placeholder="E-mail" />
           <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" name="password" placeholder="Password" />
@@ -56,11 +55,5 @@ function SignUp({userSignup}){
 
 }
 
-const mapDispatchToProps=(dispatch)=>({
 
-    userSignup:(name,email,password,setName,setEmail,setPass,setRePass)=>dispatch(userSignup(name,email,password,setName,setEmail,setPass,setRePass))
-    
-    
-    
- })
-export default connect(null,mapDispatchToProps) (SignUp)
+export default  SignUpVendor

@@ -1,6 +1,6 @@
 import firebase from '../config/firebase'
 import {storage} from '../config/firebase'
-export const addCar=(data)=>{    
+ const addCar=(data)=>{    
 
 
  
@@ -46,3 +46,77 @@ export const addCar=(data)=>{
    
     
     }
+
+    const  VendorSignup=(name, email, password, setUserName, setEmail, setPassword, setRePass)=>{
+        
+
+          
+    
+                 
+    
+    
+           
+    
+    var emails=[]   
+    firebase.database().ref('/Employees').once('value',(snapshot)=>{
+        snapshot.forEach((child)=>{
+            emails.push(child.val().email)
+    
+        })
+     var flag=false;
+     emails && emails.map((v,i)=>{
+         if(emails[i]===email){
+             alert("Email Already Exist Try with some other credentials!")
+             setUserName("")
+             setEmail("")
+             setPassword("")
+             setRePass("")
+             flag=true;
+         }
+     })
+     if(flag==false){
+        var key = firebase.database().ref('/Vendors').push().key
+        let obj={
+        key:key,
+        name:name,
+        email:email,
+        password:password
+        
+        }
+         firebase.database().ref('Vendors/'+key).set(obj,(err)=>{
+            if(err){
+                alert("Some Thing Went Wrong!")
+            }
+            else{
+                alert("Sign up successfull!")
+                setUserName("")
+                setEmail("")
+                setPassword("")
+                setRePass("")
+            }
+        })
+    }
+    })
+    
+    
+    }
+                
+    
+    
+    
+            
+            
+    
+    
+    
+    
+    
+        
+
+       
+
+       export {
+           addCar,
+           VendorSignup
+       }
+        

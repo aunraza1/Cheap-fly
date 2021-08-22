@@ -2,8 +2,16 @@
 import '../assets/style.css'
 import {Link} from 'react-router-dom'
 import {connect} from 'react-redux'
+import { useEffect } from 'react'
 
-function Header({reference,click,loggedUser,history}) {
+function Header({reference,click,loggedUser,venderData}) {
+
+
+  useEffect(()=>{
+    console.log("LOGGED_USER",loggedUser)
+    console.log("VENDOR_DATA",venderData)
+
+  })
 
   console.log(click)
   return (
@@ -25,7 +33,7 @@ function Header({reference,click,loggedUser,history}) {
                 <ul>
                   <li>
                     <i className="fa fa-envelope" aria-hidden="true" />
-                    <span>{loggedUser!=""?loggedUser:"Please Login"}</span>
+                    <span>{loggedUser!=""?loggedUser.name:"Please Login"}</span>
                   </li>
                  
                   <li>
@@ -74,7 +82,8 @@ function Header({reference,click,loggedUser,history}) {
 
 
 const mapStateToProps=(state)=>({
-  loggedUser:state.loggedUser
+  loggedUser:state.loggedUser,
+  venderData:state.venderData
 
 })
 

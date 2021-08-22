@@ -7,14 +7,17 @@ import Tours from './components/tours'
 import Clients from './components/clients'
 import {useRef} from 'react'
 import { useEffect } from 'react'
+import {connect} from 'react-redux'
 
 
-function Home(){
+function Home({loggedUser,venderData}){
 
 
     useEffect(()=>{
       console.log(headers)
       console.log("Tours=>",tours)
+      console.log("LOGGED_USER",loggedUser)
+      console.log("VENDER_DATA",venderData)
 
     })
 
@@ -38,4 +41,9 @@ function Home(){
     )
 
 }
-export default Home
+const mapStateToProps=(state)=>({
+  loggedUser:state.loggedUser,
+  venderData:state.venderData
+
+})
+export default connect(mapStateToProps,null)(Home) 

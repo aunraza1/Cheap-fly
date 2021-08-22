@@ -2,6 +2,7 @@ const INITIAL_STATE={
     loggedUser:"",
     hotelData:"",
     carData: [],
+    venderData:"",
 
 }
 
@@ -27,6 +28,14 @@ export default (state = INITIAL_STATE, action) => {
         return({
             ...state,hotelData:action.data
         })
+
+
+        case "VENDOR_LOGGED_IN":
+            return(
+                {
+                    ...state,venderData:action.data
+                }
+            )
         
         default:
             return state

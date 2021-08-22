@@ -13,14 +13,14 @@ const userSignup = (name, email, password, setUserName, setEmail, setPassword, s
                 var user = firebase.auth().currentUser
 
 
-                var key = firebase.database().ref('/Employees').push().key
+                var key = firebase.database().ref('/Users').push().key
                 let obj = {
                     uid: user.uid,
                     key: key,
                     name: name,
                     email: email,
                     password: password,
-                    verfied: false
+                   
 
                 }
                 firebase.database().ref('Users/' + key).set(obj).then(() => {
@@ -81,17 +81,20 @@ const signin = (email, password, setEmail, setPassword) => {
                 var names = [];
                 var emails = [];
                 var passwords = [];
+                var keys=[];
                 firebase.database().ref('/Users').once('value', (snapshot) => {
                     snapshot.forEach((child) => {
                         names.push(child.val().name)
                         emails.push(child.val().email)
                         passwords.push(child.val().password)
+                        keys.push(child.val().key)
                     })
                     var flag = false;
                     emails.map((v, i) => {
                         if (emails[i] === email && passwords[i] == password) {
                             flag = true
-                            dispatch({ type: "LOGGED_IN", data: names[i] })
+                            dispatch({ type:"LOGGED_IN", data:{name:names[i],uid:keys[i]}})
+
                             setEmail("")
                             setPassword("")
 
@@ -245,6 +248,59 @@ const carFetch = (dispatch) => {
    
 
     }
+    const signinVendor=(email, password, setEmail, setPassword)=>{
+       
+            return async (dispatch) => {
+        
+        
+        
+                        var names = [];
+                        var emails = [];
+                        var passwords = [];
+                        var key=[];
+                        firebase.database().ref('Vendors/').once('value', (snapshot) => {
+                            snapshot.forEach((child) => {
+                                names.push(child.val().name)
+                                emails.push(child.val().email)
+                                passwords.push(child.val().password)
+                                key.push(child.val().key)
+                            })
+                            var flag = false;
+                           emails && emails.map((v, i) => {
+                                if (emails[i] === email && passwords[i] == password) {
+                                    flag = true
+                                    alert("Login Successfull!")
+                                    dispatch({ type:"VENDOR_LOGGED_IN", data:{name:names[i],uid:key[i]}})
+                                    setEmail("")
+                                    setPassword("")
+    
+        
+                                }
+                            
+        
+        
+                            })
+                            if(flag==false){
+                                alert("Incorrect Email/Pass")
+                                setEmail("")
+                                setPassword("")
+                            }
+        
+        
+                        })
+        
+        
+                    }
+                  
+            
+        
+        
+            }
+        
+
+
+
+    
 
 export {
 
@@ -253,5 +309,7 @@ export {
     addCar,
     registerHotel,
     carFetch,
-    getHotelsfromVendors
+    getHotelsfromVendors,
+    signinVendor,
+  
 }
