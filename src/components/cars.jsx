@@ -13,7 +13,8 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import {
   Grid,
-} from '@material-ui/core/'
+} from '@material-ui/core/';
+import  CarDialog  from './SharedComponent/CarDialog';
 
 const useStyles = makeStyles(theme =>({
   root: {
@@ -26,7 +27,9 @@ const useStyles = makeStyles(theme =>({
   },
 }));
 
-function Cars({ getCars, carData }) {
+function Cars({ getCars, carData, userData }) {
+  const [toggleOpen, setToggleOpen] = useState(false);
+  const [bookingValue, setBookingValue] = useState();
   const classes = useStyles();
   useEffect(() => {
     getCars()
@@ -34,6 +37,7 @@ function Cars({ getCars, carData }) {
   return (
     <>
       <div className={classes.rootDiv} style={{margin: '3%',}} >
+        {console.log(userData)}
         <Grid
           container
           spacing={2}
@@ -42,7 +46,7 @@ function Cars({ getCars, carData }) {
           alignItems="flex-start"
         >
           {carData && carData.map((val, i) => (
-            <Grid item xs={12} sm={12} md={3} key={i}>
+            <Grid item xs={12} sm={8} md={3} key={i}>
             <Card >
               <CardActionArea>
                 <CardMedia
@@ -60,7 +64,7 @@ function Cars({ getCars, carData }) {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" color="primary">
+                <Button size="small" color="primary" onClick={()=>{ setBookingValue(carData[i]);  setToggleOpen(true)}}>
                   Rent A Car
                 </Button>
 
@@ -68,8 +72,14 @@ function Cars({ getCars, carData }) {
             </Card>
             </Grid>
           ))}
-
+          {console.log(toggleOpen)}
         </Grid>
+        <CarDialog optionValues={() => {
+               setToggleOpen(false)
+            }} toggleValue={(value) => { 
+              
+            setToggleOpen(value) 
+            }} openDialog={toggleOpen} bookingValues={bookingValue} userDetails={[]} />
       </div>
 
     </>
@@ -84,7 +94,7 @@ const mapDispatchToProps = (dispatch) => ({
 
 const mapStateToProps = (state) => ({
   carData: state.carData,
-
+  userData: state.loggedUser,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cars)
