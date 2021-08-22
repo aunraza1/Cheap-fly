@@ -60,17 +60,17 @@ const useStyles = makeStyles(theme =>({
         toggleValue(false);
     };
     useEffect(() => {
-        {console.log(openDialog)}
+        
         setToggleOpen(openDialog);
         setDialogValue({
-            ownerId: bookingValues?.key,
+            ownerId: bookingValues?.ownerId,
             companyName: bookingValues?.name,
             carName: bookingValues?.carName,
             carSegment: bookingValues?.carSegment,
             hourlyRate: bookingValues?.hourlyRate,
             location: bookingValues?.location,
             userId: userDetails?.uid,
-            userName: userDetails?.userName,
+            userName: userDetails?.name,
             contactNo: null,
             duration: null,
             date: '',
@@ -81,8 +81,7 @@ const useStyles = makeStyles(theme =>({
     }, [openDialog])
     const handleSubmit = (event) => {
         event.preventDefault();
-        //total amount
-        optionValues(dialogValue)
+        optionValues({...dialogValue, totalAmount: dialogValue?.hourlyRate * dialogValue?.duration})
         handleClose();
     };
     return (
@@ -92,6 +91,7 @@ const useStyles = makeStyles(theme =>({
                 onClose={handleClose}
                 aria-labelledby="form-dialog-title"
             >
+               
                 <form onSubmit={handleSubmit}>
                     <DialogTitle id="form-dialog-title" style={{marginLeft: '35%'}}>Rent A Car</DialogTitle>
                     <Card >
@@ -110,6 +110,7 @@ const useStyles = makeStyles(theme =>({
                             value={dialogValue.companyName}
                             multiline={true}
                             required
+                            disabled={dialogValue?.companyName ? true : false}
                             onChange={(event) =>
                                 setDialogValue({
                                     ...dialogValue,
@@ -128,6 +129,7 @@ const useStyles = makeStyles(theme =>({
                             value={dialogValue.carName}
                             multiline={true}
                             required
+                            disabled={dialogValue?.carName ? true : false}
                             onChange={(event) =>
                                 setDialogValue({
                                     ...dialogValue,
@@ -146,6 +148,7 @@ const useStyles = makeStyles(theme =>({
                             value={dialogValue.carSegment}
                             multiline={true}
                             required
+                            disabled={dialogValue?.carSegment ? true : false}
                             onChange={(event) =>
                                 setDialogValue({
                                     ...dialogValue,
@@ -164,6 +167,7 @@ const useStyles = makeStyles(theme =>({
                             value={dialogValue.location}
                             multiline={true}
                             required
+                            disabled={dialogValue?.location ? true : false}
                             onChange={(event) =>
                                 setDialogValue({
                                     ...dialogValue,
@@ -182,6 +186,7 @@ const useStyles = makeStyles(theme =>({
                             id="purchasePrice"
                             required
                             value={dialogValue.hourlyRate}
+                            disabled={dialogValue?.hourlyRate ? true : false}
                             onChange={(event) =>
                                 setDialogValue({
                                     ...dialogValue,
@@ -199,6 +204,7 @@ const useStyles = makeStyles(theme =>({
                             id="description"
                             value={dialogValue.userName}
                             multiline={true}
+                            disabled={dialogValue?.userName ? true : false}
                             required
                             onChange={(event) =>
                                 setDialogValue({
@@ -242,7 +248,7 @@ const useStyles = makeStyles(theme =>({
                                     duration: parseInt(event.target.value)
                                 })
                             }
-                            label="Duration"
+                            label="Duration (Hours)"
                             type="number"
                             variant="outlined"
                             style={{ width: "60%" }}

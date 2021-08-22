@@ -20,7 +20,7 @@ import {storage} from '../config/firebase'
         console.log("Error Occured!")
     }
     else{
-        alert("Success! Hotel Added")
+        alert("Success! Added")
     
     }
     })

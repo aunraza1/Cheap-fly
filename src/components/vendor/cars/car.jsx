@@ -2,8 +2,9 @@ import React from 'react';
 import '../../../assets/style.css'
 import {useState,useEffect} from 'react'
 import {addCar} from '../../../config/api';
+import { connect } from 'react-redux'
 
-function CarBooking(){
+function CarBooking({vendorData}){
   
     const [carDetails,setDetails]=useState({
         name:"",
@@ -16,7 +17,9 @@ function CarBooking(){
     
 
     })
-
+    useEffect(()=>{
+        setDetails({...carDetails, ownerId: vendorData?.uid})
+    },[vendorData?.uid])
     const submitDtails = (e) =>{
         e.preventDefault()
         addCar(carDetails);
@@ -31,7 +34,7 @@ function CarBooking(){
                    <div className="form-header">
                      <h1>Rent A Car</h1>
                    </div>
-                   <form onSubmit={submitDtails}>
+                   {(vendorData?.uid) ? (<form onSubmit={submitDtails}>
                      <div className="row">
                        <div className="col-sm-6" >
                          <div className="form-group">
@@ -90,7 +93,10 @@ function CarBooking(){
                      <div className="form-btn">
                        <button className="submit-btn" type='submit' >Rent Now</button>
                      </div>
-                   </form>
+                   </form>) : (<div className="form-header">
+                     <h1>This Service Is Not Availaible For You</h1>
+                   </div>)}
+                   
                  </div>
                </div>
              </div>
@@ -102,4 +108,12 @@ function CarBooking(){
     )
 
 }
-export default CarBooking
+const mapDispatchToProps = (dispatch) => ({
+   
+  
+  })
+const mapStateToProps = (state) => ({
+    vendorData: state.venderData,
+  })
+  
+  export default connect(mapStateToProps, mapDispatchToProps)(CarBooking)

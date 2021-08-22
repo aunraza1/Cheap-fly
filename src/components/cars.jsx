@@ -30,6 +30,7 @@ const useStyles = makeStyles(theme =>({
 function Cars({ getCars, carData, userData }) {
   const [toggleOpen, setToggleOpen] = useState(false);
   const [bookingValue, setBookingValue] = useState();
+  const [bookingData, setBookingData] = useState();
   const classes = useStyles();
   useEffect(() => {
     getCars()
@@ -37,7 +38,6 @@ function Cars({ getCars, carData, userData }) {
   return (
     <>
       <div className={classes.rootDiv} style={{margin: '3%',}} >
-        {console.log(userData)}
         <Grid
           container
           spacing={2}
@@ -72,15 +72,17 @@ function Cars({ getCars, carData, userData }) {
             </Card>
             </Grid>
           ))}
-          {console.log(toggleOpen)}
+         
         </Grid>
-        <CarDialog optionValues={() => {
+        <CarDialog optionValues={(value) => {
                setToggleOpen(false)
+               setBookingData(value)
             }} toggleValue={(value) => { 
               
             setToggleOpen(value) 
-            }} openDialog={toggleOpen} bookingValues={bookingValue} userDetails={[]} />
+            }} openDialog={toggleOpen} bookingValues={bookingValue} userDetails={userData} />
       </div>
+      
 
     </>
   )
