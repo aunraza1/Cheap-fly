@@ -100,6 +100,23 @@ import {storage} from '../config/firebase'
     
     
     }
+
+    const applyBooking=(data)=>{
+
+
+        let key =firebase.database().ref('/HotelBookings').push().key
+        firebase.database().ref('/HotelBookings/'+key).set(data,(err)=>{
+            if(err){
+                alert("Something Went Wrong!")
+            }
+            else{
+                alert("Booking Added ,wait for booking confirmation")
+            }
+
+        })
+
+    }
+
                 
     
     
@@ -117,6 +134,7 @@ import {storage} from '../config/firebase'
 
        export {
            addCar,
-           VendorSignup
+           VendorSignup,
+           applyBooking
        }
         

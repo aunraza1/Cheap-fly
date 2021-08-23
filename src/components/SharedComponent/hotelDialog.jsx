@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect ,useState} from "react";
 import TextField from "@material-ui/core/TextField";
 import Dialog from "@material-ui/core/Dialog";
 import DialogTitle from "@material-ui/core/DialogTitle";
@@ -13,6 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
+import {applyBooking} from '../../config/api'
 
 const useStyles = makeStyles(theme =>({
     root: {
@@ -37,39 +38,38 @@ const useStyles = makeStyles(theme =>({
     const [open, setToggleOpen] = React.useState(false);
     const [dialogValue, setDialogValue] = React.useState({
         ownerId: '',
-        ownerrName:"",
+        ownerName:"",
         hotelName: "",
         hotelLocation: "",
         hotelRatings:"",
-        roomType:"",
-        price:"",
+        price:"No Room Selected",
         userId:"",
         userName: "",
-        contactNo: null,
         days: null,
-        checkInDate: '',
-        checkOutDate:'',
+        roomType:null,
+        checkInDate: null,
         bookingStatus: false,
         cancelBooking: false,
+        amountPayable:"0"
     });
+   
 
     const handleClose = () => {
         setDialogValue({
-         ownerId: '',
-         roomType:'',
-        ownerrName:"",
-        hotelName: "",
-        hotelLocation: "",
-        hotelRatings:"",
-        price:"",
-        userId:"",
-        userName: "",
-        contactNo: null,
-        days: null,
-        checkInDate: '',
-        checkOutDate:'',
-        bookingStatus: false,
-        cancelBooking: false,
+            ownerId: '',
+            ownerName:"",
+            hotelName: "",
+            hotelLocation: "",
+            hotelRatings:"",
+            price:"",
+            userId:"",
+            userName: "",
+            days: null,
+            roomType:null,
+            checkInDate: null,
+            bookingStatus: false,
+            cancelBooking: false,
+            amountPayable:"0"
         });
         setToggleOpen(false);
         toggleValue(false);
@@ -77,28 +77,36 @@ const useStyles = makeStyles(theme =>({
     useEffect(() => {
        
         setToggleOpen(openDialog);
-        setDialogValue({
+        setDialogValue({...dialogValue,
             ownerId: bookingValues?.ownerId,
             ownerName:bookingValues?.ownerName,
             hotelName: bookingValues?.hotelName,
             hotelLocation: bookingValues?.hotelLocation,
             hotelRatings:bookingValues?.hotelRatings,
-            userID:userDetails.uid,
+            userId:userDetails.uid,
             userName:userDetails?.name ,
-            contactNo: null,
             days: null,
-            checkInDate: '',
-            checkOutDate:'',
+            roomType:"",
+            checkInDate: "",
             bookingStatus: false,
             cancelBooking: false,
+            amountPayable:"0"
         })
     }, [openDialog])
     const handleSubmit = (event) => {
         event.preventDefault();
-        //total amount
         optionValues(dialogValue)
         handleClose();
+        applyBooking(dialogValue)
+
+  
+
+
     };
+
+
+
+
     return (
         <>
             <Dialog
@@ -170,38 +178,40 @@ const useStyles = makeStyles(theme =>({
                             style={{ width: "60%" }}
 
                         />
+                        <div>
+        <FormControl variant="outlined" className={classes.formControl}>
+        <InputLabel id="demo-simple-select-outlined-label">Select Room</InputLabel>
+        <Select
+        style={{width:"250%"}}
+          labelId="demo-simple-select-outlined-label"
+          id="demo-simple-select-outlined"
+          onChange={(e)=>setDialogValue({...dialogValue,price:e.target.value[0],roomType:e.target.value[1]})}
+          label="Select Room"
+          value={bookingValues}
+          required
+          
+        >
+       
+          {bookingValues?.singlePrice ? <MenuItem value={[bookingValues?.singlePrice,"Single Room"]}>Single Room</MenuItem> : null }
+          {bookingValues?.doublePrice ? <MenuItem value={[bookingValues?.doublePrice,"Double Room"]}>Double Room</MenuItem> : null }
+          {bookingValues?.kingPrice ? <MenuItem value={[bookingValues?.kingPrice,"King Room"]}>King Size</MenuItem> : null }
+          {bookingValues?.queenPrice ? <MenuItem value={[bookingValues?.queenPrice,"Queen Room"]}>Queen Size</MenuItem> : null }
+        </Select>
+      </FormControl>
+      </div>
                        
-                        <TextField
-                            margin="dense"
-                            id="purchasePrice"
-                            required
-                            value={dialogValue?.price}
-                            label="Hourly Rate"
-                            type="number"
-                            variant="outlined"
-                            style={{ width: "60%" }}
-
-                        />
-                        <TextField
+                 
+                
+                        
+                      <TextField
                             margin="dense"
                             id="description"
-                            value={dialogValue?.userName}
+                            value={dialogValue?.price}
+                            disabled={dialogValue?.hotelRatings?true:false}
                             multiline={true}
                             required
-                            label="User Name"
-                            type="text"
-                            variant="outlined"
-                            style={{ width: "60%" }}
-
-                        />
-                        
-                        <TextField
-                            margin="dense"
-                            id="cost"
-                            required
-                            value={dialogValue?.price}
                             label="Price"
-                            type="number"
+                            type="text"
                             variant="outlined"
                             style={{ width: "60%" }}
 
@@ -215,7 +225,8 @@ const useStyles = makeStyles(theme =>({
                             onChange={(event) =>
                                 setDialogValue({
                                     ...dialogValue,
-                                    days: parseInt(event.target.value)
+                                    days: parseInt(event.target.value),
+                                    amountPayable:parseInt(event.target.value)*dialogValue.price
                                 })
                             }
                             label="Days"
@@ -224,16 +235,19 @@ const useStyles = makeStyles(theme =>({
                             style={{ width: "60%" }}
 
                         />
-                        <h6>Check in Date</h6>
+                        <div style={{marginTop:20}}>
+                        
                         <TextField
-                            margin="dense"
-                            id="salePrice"
-                            required
-                            value={dialogValue.date}
-                            onChange={(event) =>
+                        name="someDate"
+                        label="Check in Date"
+                        InputLabelProps={{ shrink: true, required: true }}
+                        required
+                        type="date"
+                        value={dialogValue?.checkInDate}
+                        onChange={(event) =>
                                 setDialogValue({
                                     ...dialogValue,
-                                    date: event.target.value
+                                    checkInDate: event.target.value
                                 })
                             }
                             
@@ -243,27 +257,28 @@ const useStyles = makeStyles(theme =>({
                             style={{ width: "60%" }}
 
                         />
-        <div>
-        <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Select Room</InputLabel>
-        <Select
-        style={{width:"250%"}}
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-       
-          onChange={(e)=>setDialogValue({...dialogValue,price:parseInt(e.target.value[0]),roomType:e.target.value[1]})}
-          label="Select Room"
-          value={dialogValue?.roomType}
-          
-        >
-       
-          {bookingValues?.singlePrice ? <MenuItem value={[bookingValues?.singlePrice,"Single Room"]}>Single Room</MenuItem> : null }
-          {bookingValues?.doublePrice ? <MenuItem value={[bookingValues?.doublePrice,"Double Room"]}>Double Room</MenuItem> : null }
-          {bookingValues?.kingPrice ? <MenuItem value={[bookingValues?.kingPrice,"King Room"]}>King Size</MenuItem> : null }
-          {bookingValues?.queenPrice ? <MenuItem value={[bookingValues?.queenPrice,"Queen Room"]}>Queen Size</MenuItem> : null }
-        </Select>
-      </FormControl>
-      </div>
+                        </div>
+
+                        <div style={{marginTop:10}}>
+
+                           <TextField
+                            margin="dense"
+                            id="description"
+                            value={dialogValue.amountPayable}
+                            disabled={dialogValue?.hotelRatings?true:false}
+                            multiline={true}
+                            required
+                            label="Amount Payable"
+                            type="text"
+                            variant="outlined"
+                            style={{ width: "60%" }}
+
+                        />
+                        </div>
+     
+                      
+    
+    
 
 
                     </DialogContent>
