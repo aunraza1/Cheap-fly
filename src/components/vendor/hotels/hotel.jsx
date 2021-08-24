@@ -34,6 +34,7 @@ const sendData=(e)=>{
            <div className="container">
              <div className="row">
                <div className="booking-form">
+                 
                  <div className="form-header">
                    <h1>Hotel Details</h1>
                  </div>
