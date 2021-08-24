@@ -4,7 +4,7 @@ import {useState,useEffect} from 'react'
 import {connect} from 'react-redux'
 import {registerHotel} from '../../../store/actions/index'
 
-function HotelBooking({registerHotel}){
+function HotelBooking({registerHotel,venderData}){
 
     const [hotelDetails,sethotelDetails]=useState({
         hotelName:"",
@@ -15,6 +15,9 @@ function HotelBooking({registerHotel}){
         hotelLocation:"",
         hotelRatings:"",
         hotelImage:"",
+        ownerId:venderData?.uid,
+        ownerName:venderData?.name,
+     
     })
 
   
@@ -120,9 +123,12 @@ const sendData=(e)=>{
 
 }
 
+const mapStateToProps=(state)=>({
+  venderData:state.venderData
 
+})
 const mapDispatchToProps=(dispatch)=>({
     registerHotel:(obj)=>dispatch(registerHotel(obj))
 
 })
-export default connect(null,mapDispatchToProps) (HotelBooking)
+export default connect(mapStateToProps,mapDispatchToProps) (HotelBooking)

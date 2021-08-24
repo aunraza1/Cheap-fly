@@ -176,6 +176,7 @@ const addCar = (data) => {
 const registerHotel = (data) => {
     return (dispatch) => {
         console.log(data)
+       
 
 
         const uploadImage = storage.ref('Images/' + data.hotelImage.name).put(data.hotelImage)
@@ -218,6 +219,7 @@ const registerHotel = (data) => {
 
 
     }
+
 
 
 }

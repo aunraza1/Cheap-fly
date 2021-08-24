@@ -10,9 +10,11 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import HotelDialog from './SharedComponent/hotelDialog';
 import {
   Grid,
 } from '@material-ui/core/'
+import { useState } from 'react';
 
 const useStyles = makeStyles(theme =>({
   root: {
@@ -25,12 +27,14 @@ const useStyles = makeStyles(theme =>({
   },
 }));
 
-function HotelBooking({getHotelsfromVendors,hotelData}){
+function HotelBooking({getHotelsfromVendors,hotelData,loggedUser}){
   const classes = useStyles();
+  const [selectedHotel,setSelectedHotel]=useState()
+  const [toggleOpen, setToggleOpen] = useState(false);
 useEffect(()=>{
     getHotelsfromVendors()
-   console.log("REDUX_DATA=>",hotelData)
-})
+  
+},[])
 return (
   <>
     <div className={classes.rootDiv} style={{margin: '3%',}} >
@@ -60,7 +64,9 @@ return (
               </CardContent>
             </CardActionArea>
             <CardActions>
-              <Button size="small" color="primary">
+              <Button size="small" color="primary" 
+              onClick={()=>{ setSelectedHotel(hotelData[i]);  setToggleOpen(true)}}
+              >
                Book Room
               </Button>
 
@@ -70,6 +76,12 @@ return (
         ))}
 
       </Grid>
+      <HotelDialog optionValues={() => {
+               setToggleOpen(false)
+            }} toggleValue={(value) => { 
+              
+            setToggleOpen(value) 
+            }} openDialog={toggleOpen} bookingValues={selectedHotel} userDetails={loggedUser} />
     </div>
 
   </>
@@ -82,7 +94,8 @@ const mapDispatchToProps=(dispatch)=>({
 })
 
 const mapStateToProps=(state)=>({
-    hotelData:state.hotelData
+    hotelData:state.hotelData,
+    loggedUser:state.loggedUser
 
 })
 export default connect(mapStateToProps,mapDispatchToProps)(HotelBooking)

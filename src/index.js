@@ -2,19 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
-import { createMuiTheme } from '@material-ui/core/styles';
+import { useEffect } from 'react';
 import green from '@material-ui/core/colors/green';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { ThemeProvider } from '@material-ui/styles';
 import reportWebVitals from './reportWebVitals';
 import {Provider} from 'react-redux'
 import Store from './store'
-const theme = createMuiTheme({
-color:green
-});
+
 
 ReactDOM.render(
+
   <Provider store={Store}>
+     
   <React.StrictMode>
     <App  />
     </React.StrictMode>

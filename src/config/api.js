@@ -49,23 +49,23 @@ const addCar = (data) => {
 
 const carBooking = (bookingData) => {
     console.log(bookingData)
- 
-   if(typeof bookingData === 'object'){
-       var key = firebase.database().ref('/Book_Car').push().key
-   
-    firebase.database().ref('/Book_Car/'+key).set(bookingData, (err) => { 
-        if (err) {
-            console.log("Error Occured!")
-        }
-        else {
-            alert("Success! Added")
-           
-        }
-    })
-   }
-    
-    
- 
+
+    if (typeof bookingData === 'object') {
+        var key = firebase.database().ref('/Book_Car').push().key
+
+        firebase.database().ref('/Book_Car/' + key).set(bookingData, (err) => {
+            if (err) {
+                console.log("Error Occured!")
+            }
+            else {
+                alert("Success! Added")
+
+            }
+        })
+    }
+
+
+
 }
 
 
@@ -119,8 +119,28 @@ const VendorSignup = (name, email, password, setUserName, setEmail, setPassword,
 
 
 
+
+const applyBooking = (data) => {
+
+
+    let key = firebase.database().ref('/HotelBookings').push().key
+    firebase.database().ref('/HotelBookings/' + key).set(data, (err) => {
+        if (err) {
+            alert("Something Went Wrong!")
+        }
+        else {
+            alert("Booking Added ,wait for booking confirmation")
+        }
+
+    })
+
+}
+
+
+
 export {
     addCar,
     VendorSignup,
-    carBooking
+    carBooking,
+    applyBooking
 }
