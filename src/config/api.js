@@ -53,7 +53,7 @@ const carBooking = (bookingData) => {
     if (typeof bookingData === 'object') {
         var key = firebase.database().ref('/Book_Car').push().key
 
-        firebase.database().ref('/Book_Car/' + key).set(bookingData, (err) => {
+        firebase.database().ref('/Book_Car/' + key).set({...bookingData,key:key}, (err) => {
             if (err) {
                 console.log("Error Occured!")
             }
@@ -124,7 +124,9 @@ const applyBooking = (data) => {
 
 
     let key = firebase.database().ref('/HotelBookings').push().key
-    firebase.database().ref('/HotelBookings/' + key).set(data, (err) => {
+
+    
+    firebase.database().ref('/HotelBookings/' + key).set({...data,key:key}, (err) => {
         if (err) {
             alert("Something Went Wrong!")
         }

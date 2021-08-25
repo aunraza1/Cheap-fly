@@ -298,6 +298,60 @@ const carFetch = (dispatch) => {
         
         
             }
+
+
+            const userBookings=(loggedUser)=>{
+               return(dispatch)=>{
+                 
+
+                    let hotelbookings=[];
+                    let carBookings=[]
+                    firebase.database().ref('/HotelBookings/').orderByChild('bookingStatus').equalTo(false+loggedUser.name).once('value',(snapshot)=>{
+                     snapshot.forEach((child)=>{
+                         hotelbookings.push(child.val())
+                        
+
+                     })
+                   
+                     
+                    })
+                    firebase.database().ref('/Book_Car/').orderByChild('bookingStatus').equalTo(false+loggedUser.name).once('value',(snapshot)=>{
+                        snapshot.forEach((child)=>{
+                            carBookings.push(child.val())
+                           
+   
+                        })
+                      
+                        dispatch({type:"BOOKINGS" ,data:[...hotelbookings,...carBookings]})
+                       })
+                }
+
+            }
+
+            const approveduserBookings=(loggedUser)=>{
+                return(dispatch)=>{
+                  
+ 
+                     let bookings=[];
+                     firebase.database().ref('/HotelBookings/').orderByChild('bookingStatus').equalTo(true+loggedUser.name).once('value',(snapshot)=>{
+                      snapshot.forEach((child)=>{
+                          bookings.push(child.val())
+                         
+ 
+                      })
+                      console.log(bookings)
+                      dispatch({type:"APPROVED_USER_BOOKINGS" ,data:bookings})
+                     })
+                     firebase.database().ref('/Book_Car/').orderByChild('bookingStatus').equalTo(true+loggedUser).once('value',(snapshot)=>{
+                         snapshot.forEach((child)=>{
+                             bookings.push(child.val())
+
+                         })
+                         dispatch({type:"APPROVED_USER_BOOKINGS" ,data:bookings})
+                     })
+                 }
+ 
+             }
         
 
 
@@ -313,5 +367,7 @@ export {
     carFetch,
     getHotelsfromVendors,
     signinVendor,
+    userBookings,
+    approveduserBookings
   
 }

@@ -15,6 +15,7 @@ import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {applyBooking} from '../../config/api'
 
+
 const useStyles = makeStyles(theme =>({
     root: {
       flexGrow: 1,
@@ -88,7 +89,7 @@ const useStyles = makeStyles(theme =>({
             days: null,
             roomType:"",
             checkInDate: "",
-            bookingStatus: false,
+            bookingStatus: false+userDetails?.name,
             cancelBooking: false,
             amountPayable:"0"
         })
@@ -294,4 +295,6 @@ const useStyles = makeStyles(theme =>({
             </Dialog>
         </>)
 }
+
+
 export default HotelDialog

@@ -3,6 +3,8 @@ const INITIAL_STATE={
     hotelData:"",
     carData: [],
     venderData:"",
+    bookings:"",
+    approvedBookings:""
 
 }
 
@@ -36,7 +38,18 @@ export default (state = INITIAL_STATE, action) => {
                     ...state,venderData:action.data
                 }
             )
-        
+        case "BOOKINGS":
+            return({
+                ...state,bookings:action.data
+
+            })
+
+        case "APPROVED_USER_BOOKINGS":
+            return({
+
+                ...state,approvedBookings:action.data
+
+            })
         default:
             return state
     }

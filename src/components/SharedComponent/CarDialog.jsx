@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme =>({
             contactNo: null,
             duration: null,
             date: '',
-            bookingStatus: false,
+            bookingStatus: false+userDetails.name,
             cancelBooking: false,
 
         })
