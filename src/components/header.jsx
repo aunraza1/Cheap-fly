@@ -60,6 +60,12 @@ function Header({reference,click,loggedUser,venderData}) {
                       <Link to="/allbookings"><span>Prof</span></Link>
                     </div>
                   </li>
+                  <li>
+                    <div className="mu-telephone">
+              
+                      <Link to="/requests"><span>Req</span></Link>
+                    </div>
+                  </li>
                 </ul>
               </div>
             </div>

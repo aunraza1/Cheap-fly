@@ -89,7 +89,7 @@ const useStyles = makeStyles(theme =>({
             days: null,
             roomType:"",
             checkInDate: "",
-            bookingStatus: false+userDetails?.name,
+            bookingStatus: false+userDetails?.uid,
             cancelBooking: false,
             amountPayable:"0"
         })
@@ -250,7 +250,7 @@ const useStyles = makeStyles(theme =>({
                                     ...dialogValue,
                                     checkInDate: event.target.value
                                 })
-                            }
+                             }
                             
                             
                             type="date"
