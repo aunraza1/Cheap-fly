@@ -14,7 +14,7 @@ import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import Select from '@material-ui/core/Select';
 import {applyBooking} from '../../config/api'
-
+import { useRef } from 'react';
 
 const useStyles = makeStyles(theme =>({
     root: {
@@ -36,6 +36,7 @@ const useStyles = makeStyles(theme =>({
 
  const HotelDialog = ({ optionValues, openDialog, toggleValue, bookingValues, userDetails }) => {
     const classes = useStyles();
+    const reference = useRef('initial Value');
     const [open, setToggleOpen] = React.useState(false);
     const [dialogValue, setDialogValue] = React.useState({
         ownerId: '',
@@ -105,7 +106,19 @@ const useStyles = makeStyles(theme =>({
 
     };
 
-
+ const handleChange = (e) => {
+     e.preventDefault();
+     if(e.target.value === 'Single Room'){
+        setDialogValue({...dialogValue,price:bookingValues?.singlePrice,roomType:e.target.value})
+     } else if(e.target.value === 'Double Room'){
+        setDialogValue({...dialogValue,price:bookingValues?.doublePrice,roomType:e.target.value})
+     }else if(e.target.value === "King Room"){
+        setDialogValue({...dialogValue,price:bookingValues?.kingPrice,roomType:e.target.value})
+     }else {
+        setDialogValue({...dialogValue,price:bookingValues?.queenPrice,roomType:e.target.value})
+     }
+     
+ }
 
 
     return (
@@ -180,25 +193,21 @@ const useStyles = makeStyles(theme =>({
 
                         />
                         <div>
-        <FormControl variant="outlined" className={classes.formControl}>
-        <InputLabel id="demo-simple-select-outlined-label">Select Room</InputLabel>
-        <Select
-        style={{width:"250%"}}
-          labelId="demo-simple-select-outlined-label"
-          id="demo-simple-select-outlined"
-          onChange={(e)=>setDialogValue({...dialogValue,price:e.target.value[0],roomType:e.target.value[1]})}
-          label="Select Room"
-          value={bookingValues}
-          required
-          
+        
+      <TextField
+          id="standard-select-currency"
+          select
+          style={{width: '60%'}}
+          label="Select"
+          variant= 'outlined'
+          value={dialogValue?.roomType}
+          onChange={handleChange}
         >
-       
-          {bookingValues?.singlePrice ? <MenuItem value={[bookingValues?.singlePrice,"Single Room"]}>Single Room</MenuItem> : null }
-          {bookingValues?.doublePrice ? <MenuItem value={[bookingValues?.doublePrice,"Double Room"]}>Double Room</MenuItem> : null }
-          {bookingValues?.kingPrice ? <MenuItem value={[bookingValues?.kingPrice,"King Room"]}>King Size</MenuItem> : null }
-          {bookingValues?.queenPrice ? <MenuItem value={[bookingValues?.queenPrice,"Queen Room"]}>Queen Size</MenuItem> : null }
-        </Select>
-      </FormControl>
+          {bookingValues?.singlePrice ? <MenuItem value={'Single Room'}>Single Room</MenuItem> : null }
+          {bookingValues?.doublePrice ? <MenuItem value={"Double Room"}>Double Room</MenuItem> : null }
+          {bookingValues?.kingPrice ? <MenuItem value={"King Room"}>King Size</MenuItem> : null }
+          {bookingValues?.queenPrice ? <MenuItem value={"Queen Room"}>Queen Size</MenuItem> : null }
+        </TextField>
       </div>
                        
                  
