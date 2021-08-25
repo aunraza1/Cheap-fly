@@ -4,7 +4,8 @@ const INITIAL_STATE={
     carData: [],
     venderData:"",
     bookings:"",
-    approvedBookings:""
+    approvedBookings:"",
+    allRequests:""
 
 }
 
@@ -50,8 +51,15 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,approvedBookings:action.data
 
             })
+
+        case "All_REQUESTS":
+            return(
+                {
+                    ...state,allRequests:action.data
+                }
+            )
         default:
             return state
     }
-    return state
+   
 }

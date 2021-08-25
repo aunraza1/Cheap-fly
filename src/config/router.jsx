@@ -8,6 +8,7 @@ import LoginTab from "../components/LoginTab";
 import VendorTab from '../components/VendorTab'
 import HotelBooking from "../components/hotelBooking";
 import Tabs from "../components/UserBookings/tabs";
+import VendorProfile from '../components/VendorProfile/bookingRequests'
 
 
 
@@ -24,6 +25,7 @@ import Tabs from "../components/UserBookings/tabs";
                 <Route exact path="/Vendor" component={VendorTab}></Route>
                 <Route exact path="/hotelBooking" component={HotelBooking}></Route>
                 <Route exact path="/allbookings" component={Tabs}></Route>
+                <Route exact path="/requests" component={VendorProfile} ></Route>
                
             </Router>
       )

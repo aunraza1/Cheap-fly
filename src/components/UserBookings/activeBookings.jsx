@@ -25,20 +25,21 @@ function ActiveBookings({approveduserBookings,approvedBookings,loggedUser}){
            
             {approvedBookings && approvedBookings.map((v,i)=>{
                 return(
-                    <div style={{marginLeft:15}} className="card text-center">
+                    <div style={{marginLeft:15,marginTop:20}} className="card text-center">
                     <div className="card-header">
-                       Booking Approved!
+                       {`Booking #${v.key}`}
                     </div>
                     <div className="card-body">
-                      <h2 className="card-title">{v.hotelName}</h2>
-                      <h5> {`${v.hotelRatings} Star Hotel`}</h5>
-                      <h5>{`${v.days} Day/s Stay`}</h5>
-                      <h6>{`${v.checkInDate} Ariving Date`}</h6>
+                      <h2 className="card-title">{v.hotelName?v.hotelName:v.carName}</h2>
+                      <h5> {v.hotelRatings?v.hotelRatings+" Star Hotel":v.carSegment+""}</h5>
+                      <h5>{v.days?v.days+" Day/s Stay":v.duration+" Hour/s"}</h5>
+                      <h5>{`${v.amountPayable?v.amountPayable:v.totalAmount} PKR Amount Payable`}</h5>
+                      <h6>{v.checkInDate?v.checkInDate+" Arriving Date":"Required on: "+v.date} </h6>
                       
     
                     </div>
                     <div className="card-footer text-muted">
-                    <p className="card-text">{`${v.amountPayable} PKR Amount payed!`}</p>
+                    <p className="card-text">Request Sent!</p>
                     </div>
                   </div>
 

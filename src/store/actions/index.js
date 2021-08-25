@@ -306,7 +306,7 @@ const carFetch = (dispatch) => {
 
                     let hotelbookings=[];
                     let carBookings=[]
-                    firebase.database().ref('/HotelBookings/').orderByChild('bookingStatus').equalTo(false+loggedUser.name).once('value',(snapshot)=>{
+                    firebase.database().ref('/HotelBookings/').orderByChild('bookingStatus').equalTo(false+loggedUser.uid).once('value',(snapshot)=>{
                      snapshot.forEach((child)=>{
                          hotelbookings.push(child.val())
                         
@@ -315,7 +315,7 @@ const carFetch = (dispatch) => {
                    
                      
                     })
-                    firebase.database().ref('/Book_Car/').orderByChild('bookingStatus').equalTo(false+loggedUser.name).once('value',(snapshot)=>{
+                    firebase.database().ref('/Book_Car/').orderByChild('bookingStatus').equalTo(false+loggedUser.uid).once('value',(snapshot)=>{
                         snapshot.forEach((child)=>{
                             carBookings.push(child.val())
                            
@@ -332,28 +332,63 @@ const carFetch = (dispatch) => {
                 return(dispatch)=>{
                   
  
-                     let bookings=[];
-                     firebase.database().ref('/HotelBookings/').orderByChild('bookingStatus').equalTo(true+loggedUser.name).once('value',(snapshot)=>{
-                      snapshot.forEach((child)=>{
-                          bookings.push(child.val())
-                         
- 
-                      })
-                      console.log(bookings)
-                      dispatch({type:"APPROVED_USER_BOOKINGS" ,data:bookings})
-                     })
-                     firebase.database().ref('/Book_Car/').orderByChild('bookingStatus').equalTo(true+loggedUser).once('value',(snapshot)=>{
-                         snapshot.forEach((child)=>{
-                             bookings.push(child.val())
+               
+                    let hotelbookings=[];
+                    let carBookings=[]
+                    firebase.database().ref('/HotelBookings/').orderByChild('bookingStatus').equalTo(true+loggedUser.uid).once('value',(snapshot)=>{
+                     snapshot.forEach((child)=>{
+                         hotelbookings.push(child.val())
+                        
 
-                         })
-                         dispatch({type:"APPROVED_USER_BOOKINGS" ,data:bookings})
+                     })
+                   
+                     
+                    })
+                    firebase.database().ref('/Book_Car/').orderByChild('bookingStatus').equalTo(true+loggedUser.uid).once('value',(snapshot)=>{
+                        snapshot.forEach((child)=>{
+                            carBookings.push(child.val())
+                           
+   
+                        })
+                         dispatch({type:"APPROVED_USER_BOOKINGS" ,data:[...hotelbookings,...carBookings]})
                      })
                  }
  
              }
         
 
+
+     const venderBookings=(venderData)=>{
+         
+            return(dispatch)=>{
+                console.log("Hello-World")
+            
+                let bookings=[];
+                let carBookings=[]
+                firebase.database().ref('/HotelBookings/').orderByChild('ownerId').equalTo(venderData.uid).once('value',(snapshot)=>{
+                 snapshot.forEach((child)=>{
+                    bookings.push(child.val())
+                    
+    
+                 })
+               
+              
+                })
+                firebase.database().ref('/Book_Car/').orderByChild('ownerId').equalTo(venderData.uid).once('value',(snapshot)=>{
+                    snapshot.forEach((child)=>{
+                        carBookings.push(child.val())
+    
+                    }) 
+                    console.log(bookings)
+                    console.log(carBookings)
+                    dispatch({type:"All_REQUESTS" ,data:[...bookings,...carBookings]})
+                })
+            }
+         
+
+     }
+             
+             
 
 
     
@@ -368,6 +403,8 @@ export {
     getHotelsfromVendors,
     signinVendor,
     userBookings,
-    approveduserBookings
+    approveduserBookings,
+    venderBookings,
+ 
   
 }
