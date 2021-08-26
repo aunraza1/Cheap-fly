@@ -121,9 +121,10 @@ const applyBooking = (data) => {
 
 
 
-const Requests=(key,uid)=>{
+const Requests=(key,uid,ownerId)=>{
 let newData={
-    bookingStatus:true+uid
+    bookingStatus:true+uid,
+    vendorRequestStatus:true+ownerId
 }
 
     firebase.database().ref('/Bookings/').orderByChild('key').equalTo(key).on("child_added",(snapshot)=>{

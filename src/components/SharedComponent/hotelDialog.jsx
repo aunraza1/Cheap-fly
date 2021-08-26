@@ -31,7 +31,7 @@ const useStyles = makeStyles(theme =>({
       },
   }));
 
- const HotelDialog = ({ optionValues, openDialog, toggleValue, bookingValues, userDetails }) => {
+ const HotelDialog = ({ optionValues, openDialog, toggleValue, bookingValues, userDetails,venderData }) => {
     const classes = useStyles();
     const reference = useRef('initial Value');
     const [open, setToggleOpen] = React.useState(false);
@@ -89,7 +89,8 @@ const useStyles = makeStyles(theme =>({
             checkInDate: "",
             bookingStatus: false+userDetails?.uid,
             cancelBooking: false,
-            amountPayable:"0"
+            amountPayable:"0",
+            vendorRequestStatus:false+bookingValues?.ownerId
         })
     }, [openDialog])
     const handleSubmit = (event) => {

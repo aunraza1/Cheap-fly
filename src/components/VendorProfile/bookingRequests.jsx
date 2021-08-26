@@ -45,7 +45,7 @@ useEffect(() => {
                     </div>
                     <div className="card-footer text-muted">
                     <p className="card-text">
-                    <a onClick={()=>Requests(v.key,v.userId)} href="#" class=" ml-1 btn btn-primary">Accept Request</a>
+                    <a onClick={()=>Requests(v.key,v.userId,v.ownerId)} href="#" class=" ml-1 btn btn-primary">Accept Request</a>
                     <a onClick={()=>removeRequest(v.key)} class=" ml-2 btn btn-primary">Reject Request</a>
                     </p>
                     </div>

@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme =>({
     },
   }));
 
- const CarDialog = ({ optionValues, openDialog, toggleValue, bookingValues, userDetails }) => {
+ const CarDialog = ({ optionValues, openDialog, toggleValue, bookingValues, userDetails,venderData }) => {
     const classes = useStyles();
     const [open, setToggleOpen] = React.useState(false);
     const [dialogValue, setDialogValue] = React.useState({
@@ -77,6 +77,7 @@ const useStyles = makeStyles(theme =>({
             date: '',
             bookingStatus: false+userDetails.uid,
             cancelBooking: false,
+            vendorRequestStatus:false+bookingValues?.ownerId
 
         })
     }, [openDialog])

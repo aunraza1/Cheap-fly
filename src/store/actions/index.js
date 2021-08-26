@@ -344,7 +344,7 @@ const carFetch = (dispatch) => {
          
             return(dispatch)=>{
                 let requests=[];
-                firebase.database().ref('/Bookings/').orderByChild('ownerId').equalTo(venderData.uid).once('value',(snapshot)=>{
+                firebase.database().ref('/Bookings/').orderByChild('vendorRequestStatus').equalTo(false+venderData.uid).once('value',(snapshot)=>{
                  snapshot.forEach((child)=>{
                     requests.push(child.val())
         

@@ -27,7 +27,7 @@ const useStyles = makeStyles(theme =>({
   },
 }));
 
-function HotelBooking({getHotelsfromVendors,hotelData,loggedUser}){
+function HotelBooking({getHotelsfromVendors,hotelData,loggedUser,venderData}){
   const classes = useStyles();
   const [selectedHotel,setSelectedHotel]=useState()
   const [toggleOpen, setToggleOpen] = useState(false);
@@ -81,7 +81,7 @@ return (
             }} toggleValue={(value) => { 
               
             setToggleOpen(value) 
-            }} openDialog={toggleOpen} bookingValues={selectedHotel} userDetails={loggedUser} />
+            }} openDialog={toggleOpen} bookingValues={selectedHotel} userDetails={loggedUser} venderDetail={venderData} />
     </div>
 
   </>
@@ -95,7 +95,8 @@ const mapDispatchToProps=(dispatch)=>({
 
 const mapStateToProps=(state)=>({
     hotelData:state.hotelData,
-    loggedUser:state.loggedUser
+    loggedUser:state.loggedUser,
+    venderData:state.venderData,
 
 })
 export default connect(mapStateToProps,mapDispatchToProps)(HotelBooking)

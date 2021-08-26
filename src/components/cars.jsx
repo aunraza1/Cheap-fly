@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme =>({
   },
 }));
 
-function Cars({ getCars, carData, userData }) {
+function Cars({ getCars, carData, userData,venderData }) {
   const [toggleOpen, setToggleOpen] = useState(false);
   const [bookingValue, setBookingValue] = useState();
   const [bookingData, setBookingData] = useState();
@@ -92,7 +92,7 @@ function Cars({ getCars, carData, userData }) {
             }} toggleValue={(value) => { 
               
             setToggleOpen(value) 
-            }} openDialog={toggleOpen} bookingValues={bookingValue} userDetails={userData} />
+            }} openDialog={toggleOpen} bookingValues={bookingValue} userDetails={userData} venderData={venderData} />
       </div>
       
 
@@ -109,6 +109,7 @@ const mapDispatchToProps = (dispatch) => ({
 const mapStateToProps = (state) => ({
   carData: state.carData,
   userData: state.loggedUser,
+  venderData:state.venderData,
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(Cars)
