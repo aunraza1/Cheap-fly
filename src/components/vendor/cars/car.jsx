@@ -20,9 +20,11 @@ function CarBooking({vendorData}){
     useEffect(()=>{
         setDetails({...carDetails, ownerId: vendorData?.uid})
     },[vendorData?.uid])
+
     const submitDtails = (e) =>{
         e.preventDefault()
-        addCar(carDetails);
+        addCar(carDetails)
+      
     }
     return(
         <div>
