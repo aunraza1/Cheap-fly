@@ -304,55 +304,37 @@ const carFetch = (dispatch) => {
                return(dispatch)=>{
                  
 
-                    let hotelbookings=[];
-                    let carBookings=[]
-                    firebase.database().ref('/HotelBookings/').orderByChild('bookingStatus').equalTo(false+loggedUser.uid).once('value',(snapshot)=>{
+                    let bookings=[];
+                    firebase.database().ref('/Bookings/').orderByChild('bookingStatus').equalTo(false+loggedUser.uid).once('value',(snapshot)=>{
                      snapshot.forEach((child)=>{
-                         hotelbookings.push(child.val())
+                         bookings.push(child.val())
                         
 
                      })
                    
-                     
+                     dispatch({type:"BOOKINGS" ,data:bookings})
                     })
-                    firebase.database().ref('/Book_Car/').orderByChild('bookingStatus').equalTo(false+loggedUser.uid).once('value',(snapshot)=>{
-                        snapshot.forEach((child)=>{
-                            carBookings.push(child.val())
-                           
-   
-                        })
-                      
-                        dispatch({type:"BOOKINGS" ,data:[...hotelbookings,...carBookings]})
-                       })
+               
                 }
 
             }
 
             const approveduserBookings=(loggedUser)=>{
                 return(dispatch)=>{
-                  
- 
-               
-                    let hotelbookings=[];
-                    let carBookings=[]
-                    firebase.database().ref('/HotelBookings/').orderByChild('bookingStatus').equalTo(true+loggedUser.uid).once('value',(snapshot)=>{
+                 
+
+                    let bookings=[];
+                    firebase.database().ref('/Bookings/').orderByChild('bookingStatus').equalTo(true+loggedUser.uid).once('value',(snapshot)=>{
                      snapshot.forEach((child)=>{
-                         hotelbookings.push(child.val())
+                         bookings.push(child.val())
                         
 
                      })
                    
-                     
+                     dispatch({type:"APPROVED_USER_BOOKINGS" ,data:bookings})
                     })
-                    firebase.database().ref('/Book_Car/').orderByChild('bookingStatus').equalTo(true+loggedUser.uid).once('value',(snapshot)=>{
-                        snapshot.forEach((child)=>{
-                            carBookings.push(child.val())
-                           
-   
-                        })
-                         dispatch({type:"APPROVED_USER_BOOKINGS" ,data:[...hotelbookings,...carBookings]})
-                     })
-                 }
+               
+                }
  
              }
         
@@ -361,28 +343,18 @@ const carFetch = (dispatch) => {
      const venderBookings=(venderData)=>{
          
             return(dispatch)=>{
-                console.log("Hello-World")
-            
-                let bookings=[];
-                let carBookings=[]
-                firebase.database().ref('/HotelBookings/').orderByChild('ownerId').equalTo(venderData.uid).once('value',(snapshot)=>{
+                let requests=[];
+                firebase.database().ref('/Bookings/').orderByChild('ownerId').equalTo(venderData.uid).once('value',(snapshot)=>{
                  snapshot.forEach((child)=>{
-                    bookings.push(child.val())
-                    
-    
+                    requests.push(child.val())
+        
                  })
-               
+                
+                 dispatch({type:"All_REQUESTS",data:requests})
               
                 })
-                firebase.database().ref('/Book_Car/').orderByChild('ownerId').equalTo(venderData.uid).once('value',(snapshot)=>{
-                    snapshot.forEach((child)=>{
-                        carBookings.push(child.val())
-    
-                    }) 
-                    console.log(bookings)
-                    console.log(carBookings)
-                    dispatch({type:"All_REQUESTS" ,data:[...bookings,...carBookings]})
-                })
+               
+          
             }
          
 

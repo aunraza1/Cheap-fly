@@ -11,7 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { carBooking } from '../config/api'
+
 import {
   Grid,
 } from '@material-ui/core/';
@@ -37,9 +37,7 @@ function Cars({ getCars, carData, userData }) {
     getCars()
   }, [])
 
-  useEffect(()=>{
-    carBooking(bookingData)
-  },[bookingData])
+
 
  
   return (

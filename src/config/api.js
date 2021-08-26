@@ -47,26 +47,7 @@ const addCar = (data) => {
 
 }
 
-const carBooking = (bookingData) => {
-    console.log(bookingData)
 
-    if (typeof bookingData === 'object') {
-        var key = firebase.database().ref('/Book_Car').push().key
-
-        firebase.database().ref('/Book_Car/' + key).set({...bookingData,key:key}, (err) => {
-            if (err) {
-                console.log("Error Occured!")
-            }
-            else {
-                alert("Success! Added")
-
-            }
-        })
-    }
-
-
-
-}
 
 
 const VendorSignup = (name, email, password, setUserName, setEmail, setPassword, setRePass) => {
@@ -123,10 +104,10 @@ const VendorSignup = (name, email, password, setUserName, setEmail, setPassword,
 const applyBooking = (data) => {
 
 
-    let key = firebase.database().ref('/HotelBookings').push().key
+    let key = firebase.database().ref('/Bookings').push().key
 
     
-    firebase.database().ref('/HotelBookings/' + key).set({...data,key:key}, (err) => {
+    firebase.database().ref('/Bookings/' + key).set({...data,key:key}, (err) => {
         if (err) {
             alert("Something Went Wrong!")
         }
@@ -140,9 +121,30 @@ const applyBooking = (data) => {
 
 
 
+const Requests=(key,uid)=>{
+let newData={
+    bookingStatus:true+uid
+}
+
+    firebase.database().ref('/Bookings/').orderByChild('key').equalTo(key).on("child_added",(snapshot)=>{
+        snapshot.ref.update(newData).then(()=>{
+            alert("Request Accepted!")
+        })
+    })
+
+}
+const removeRequest=(key)=>{
+    firebase.database().ref('/Bookings/'+key).remove().then(()=>{
+        alert("Request Removed Successfully!")
+    })
+
+}
+
+
 export {
     addCar,
     VendorSignup,
-    carBooking,
-    applyBooking
+    applyBooking,
+    Requests,
+    removeRequest
 }

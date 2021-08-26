@@ -39,7 +39,7 @@ function ActiveBookings({approveduserBookings,approvedBookings,loggedUser}){
     
                     </div>
                     <div className="card-footer text-muted">
-                    <p className="card-text">Request Sent!</p>
+                    <p className="card-text">Request Approved!</p>
                     </div>
                   </div>
 
