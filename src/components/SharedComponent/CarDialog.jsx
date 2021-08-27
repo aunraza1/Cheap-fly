@@ -38,6 +38,7 @@ const useStyles = makeStyles(theme =>({
         date: '',
         bookingStatus: false,
         cancelBooking: false,
+        amountPayable: 0
 
     });
 
@@ -56,6 +57,7 @@ const useStyles = makeStyles(theme =>({
             date: '',
             bookingStatus: false,
             cancelBooking: false,
+            amountPayable: 0
         });
         setToggleOpen(false);
         toggleValue(false);
@@ -75,6 +77,7 @@ const useStyles = makeStyles(theme =>({
             contactNo: null,
             duration: null,
             date: '',
+            amountPayable: 0,
             bookingStatus: false+userDetails.uid,
             cancelBooking: false,
             vendorRequestStatus:false+bookingValues?.ownerId
@@ -248,7 +251,9 @@ const useStyles = makeStyles(theme =>({
                             onChange={(event) =>
                                 setDialogValue({
                                     ...dialogValue,
-                                    duration: parseInt(event.target.value)
+                                    duration: parseInt(event.target.value),
+                                    amountPayable: parseInt(event.target.value) * dialogValue?.hourlyRate
+
                                 })
                             }
                             label="Duration (Hours)"
@@ -270,6 +275,18 @@ const useStyles = makeStyles(theme =>({
                             }
                             
                             type="date"
+                            variant="outlined"
+                            style={{ width: "60%" }}
+
+                        />
+                        <TextField
+                            margin="dense"
+                            id="purchasePrice"
+                            required
+                            value={dialogValue.amountPayable}
+                            disabled={dialogValue?.amountPayable ? true : false}
+                            label="Amount Payable"
+                            type="number"
                             variant="outlined"
                             style={{ width: "60%" }}
 
