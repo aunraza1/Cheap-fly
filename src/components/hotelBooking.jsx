@@ -11,6 +11,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import HotelDialog from './SharedComponent/hotelDialog';
+import Loader from './loader'
 import {
   Grid,
 } from '@material-ui/core/'
@@ -33,6 +34,7 @@ function HotelBooking({getHotelsfromVendors,hotelData,loggedUser,venderData}){
   const [toggleOpen, setToggleOpen] = useState(false);
   const [searchArray,setSearchArray]=useState([])
   const [message,setMessage]=useState()
+  const [loading,setLoading]=useState(true)
 useEffect(()=>{
     getHotelsfromVendors()
   
@@ -71,8 +73,9 @@ const filterValue=(e)=>{
 
 }
 return (
-
+  hotelData.length?
   <>
+      
       <div style={{width:400}} className="input-group">
         <input onChange={(e)=>filterValue(e)} type="search" className="form-control rounded" placeholder="Search by Price,Ratings,and Location" aria-label="Search" aria-describedby="search-addon" />
         
@@ -162,8 +165,10 @@ return (
             }} openDialog={toggleOpen} bookingValues={selectedHotel} userDetails={loggedUser} venderDetail={venderData} />
     </div>
 
-
   </>
+  :
+ <Loader/>
+ 
 )
 }
 
