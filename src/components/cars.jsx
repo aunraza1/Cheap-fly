@@ -32,16 +32,56 @@ function Cars({ getCars, carData, userData,venderData }) {
   const [toggleOpen, setToggleOpen] = useState(false);
   const [bookingValue, setBookingValue] = useState();
   const [bookingData, setBookingData] = useState();
+  const [searchArray,setSearchArray]=useState([])
+  const [message,setMessage]=useState()
   const classes = useStyles();
   useEffect(() => {
     getCars()
   }, [])
 
 
+  const filterValue=(e)=>{
+
+    var newArray=carData.filter((item)=>{
+      if(item.hourlyRate <=parseInt(e.target.value)
+       || item.carName == e.target.value
+        || item.location==e.target.value){
+        return true
+       
+      }
+  
+    })
+    if(newArray.length==false){
+  
+  
+    setMessage("Oops No Match Found!")
+    setTimeout(()=>{
+       setMessage("")
+    },5000)
+    }
+    else{
+      setMessage("Match Found!")
+      setTimeout(()=>{
+        setMessage("")
+     },5000)
+    }
+  
+    console.log(newArray)
+    setSearchArray(newArray)
+   
+  
+  }
+
 
  
   return (
     <>
+          <div style={{width:400}} className="input-group">
+        <input onChange={(e)=>filterValue(e)} type="search" className="form-control rounded" placeholder="Search by Car,Price,and Location" aria-label="Search" aria-describedby="search-addon" />
+        
+      </div>
+      <div>{message}</div>
+
       <div className={classes.rootDiv} style={{margin: '3%',}} >
         <Grid
           container
@@ -50,7 +90,11 @@ function Cars({ getCars, carData, userData,venderData }) {
           justify="flex-start"
           alignItems="flex-start"
         >
-          {carData && carData.map((val, i) => (
+
+
+
+  {searchArray.length? searchArray.map((val,i)=>{
+          return(
             <Grid item xs={12} sm={8} md={3} key={i}>
             <Card >
               <CardActionArea>
@@ -75,14 +119,49 @@ function Cars({ getCars, carData, userData,venderData }) {
                 </CardContent>
               </CardActionArea>
               <CardActions>
-                <Button size="small" color="primary" onClick={()=>{ setBookingValue(carData[i]);  setToggleOpen(true)}}>
+                <Button size="small" color="primary" onClick={()=>{ setBookingValue(searchArray[i]);  setToggleOpen(true)}}>
                   Rent A Car
                 </Button>
 
               </CardActions>
             </Card>
             </Grid>
-          ))}
+          )
+          
+        }):carData && carData.map((val, i) => (
+          <Grid item xs={12} sm={8} md={3} key={i}>
+          <Card >
+            <CardActionArea>
+              <CardMedia
+                className={classes.media}
+                image={val?.url}
+                title="Contemplative Reptile"
+              />
+              <CardContent>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {`Car Name: ${val?.carName}`}
+                </Typography>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {`Car Segment: ${val?.carSegment}`}
+                </Typography>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {`Location: ${val?.location}`}
+                </Typography>
+                <Typography gutterBottom variant="h5" component="h2">
+                  {`Hourly Rate: ${val?.hourlyRate}`}
+                </Typography>
+              </CardContent>
+            </CardActionArea>
+            <CardActions>
+              <Button size="small" color="primary" onClick={()=>{ setBookingValue(carData[i]);  setToggleOpen(true)}}>
+                Rent A Car
+              </Button>
+
+            </CardActions>
+          </Card>
+          </Grid>
+        ))}
+      
          
         </Grid>
         <CarDialog optionValues={(value) => {
