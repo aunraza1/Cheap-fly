@@ -8,13 +8,15 @@ function LoginVendor ({signinVendor}){
 
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
+    const [className,setclassName]=useState("")
 
 
 
     const Login=()=>{
         if(email!=="" && password!==""){
-          
-            signinVendor(email,password,(data)=>setEmail(data),(data)=>setPassword(data))
+            setclassName("spinner-border spinner-border-sm")
+            signinVendor(email,password,(data)=>setEmail(data),(data)=>setPassword(data),(data)=>setclassName(data))
+
         }
         else{
             alert("Fields can't be empty")
@@ -30,7 +32,9 @@ function LoginVendor ({signinVendor}){
         
           <input value ={email}onChange={(e)=>setEmail(e.target.value)} type="text" name="email" placeholder="E-mail" />
           <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" name="password" placeholder="Password" />
-          <input onClick={()=>Login()} type="submit" value="Login In"/>
+          <button  onClick={()=>Login()} className="btn btn-success" type="submit" value="Login">
+          <span className={className} role="status" aria-hidden="true" /> Login
+          </button>
          
         </div>
       </div>
@@ -42,7 +46,7 @@ function LoginVendor ({signinVendor}){
 
 
 const mapDispatchToProps=(dispatch)=>({
-    signinVendor:(email,password,setEmail,setPassword)=>dispatch(signinVendor(email,password,setEmail,setPassword))
+    signinVendor:(email,password,setEmail,setPassword,setClassName)=>dispatch(signinVendor(email,password,setEmail,setPassword,setClassName))
 
 })
 export default connect(null,mapDispatchToProps) (LoginVendor)

@@ -12,15 +12,15 @@ const override = css`
   justify-content: center;
 `;
 
-function Loader(){
+function Loader({from}){
     let [loading, setLoading] = useState(true);
-    let [color, setColor] = useState('black')
+    let [color, setColor] = useState('red')
 
 return(
     <>
 <div style={{marginTop:"25%",alignItems:'center',justifyContent:'center',textAlign:'center'}}>
-<BarLoader  color={color} loading={loading} css={override} width={100} height={10} />
-<h4>Loading Please Wait !</h4>
+<BarLoader  color={color} loading={loading} css={override} width={150} height={10} />
+<h4>{`Loading ${from} Please Wait !`}</h4>
 </div>
 </>
 )

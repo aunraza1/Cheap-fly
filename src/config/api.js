@@ -50,11 +50,11 @@ const addCar = (data) => {
 
 
 
-const VendorSignup = (name, email, password, setUserName, setEmail, setPassword, setRePass) => {
+const VendorSignup = (name, email, password, setUserName, setEmail, setPassword, setRePass,setClassName) => {
 
 
     var emails = []
-    firebase.database().ref('/Employees').once('value', (snapshot) => {
+    firebase.database().ref('/Vendors').once('value', (snapshot) => {
         snapshot.forEach((child) => {
             emails.push(child.val().email)
 
@@ -62,12 +62,14 @@ const VendorSignup = (name, email, password, setUserName, setEmail, setPassword,
         var flag = false;
         emails && emails.map((v, i) => {
             if (emails[i] === email) {
+                flag=true
                 alert("Email Already Exist Try with some other credentials!")
                 setUserName("")
                 setEmail("")
                 setPassword("")
                 setRePass("")
-                flag = true;
+                setClassName("")
+               
             }
         })
         if (flag == false) {
@@ -89,6 +91,7 @@ const VendorSignup = (name, email, password, setUserName, setEmail, setPassword,
                     setEmail("")
                     setPassword("")
                     setRePass("")
+                    setClassName("")
                 }
             })
         }

@@ -4,7 +4,7 @@ import { storage } from '../../config/firebase'
 
 
 
-const userSignup = (name, email, password, setUserName, setEmail, setPassword, setRePass) => {
+const userSignup = (name, email, password, setUserName, setEmail, setPassword, setRePass,setClassName) => {
     return (dispatch) => {
 
         firebase.auth().createUserWithEmailAndPassword(email, password)
@@ -34,6 +34,7 @@ const userSignup = (name, email, password, setUserName, setEmail, setPassword, s
                     setEmail("")
                     setPassword("")
                     setRePass("")
+                    setClassName("")
 
 
 
@@ -67,7 +68,7 @@ const userSignup = (name, email, password, setUserName, setEmail, setPassword, s
 
     }
 }
-const signin = (email, password, setEmail, setPassword) => {
+const signin = (email, password, setEmail, setPassword,setClassName) => {
     return async (dispatch) => {
 
 
@@ -77,6 +78,10 @@ const signin = (email, password, setEmail, setPassword) => {
             const user = firebase.auth().currentUser
             if (user.emailVerified) {
                 alert("Login Successful!")
+                setEmail("")
+                setPassword("")
+                setClassName("")
+
 
                 var names = [];
                 var emails = [];
@@ -94,10 +99,9 @@ const signin = (email, password, setEmail, setPassword) => {
                         if (emails[i] === email && passwords[i] == password) {
                             flag = true
                             dispatch({ type:"LOGGED_IN", data:{name:names[i],uid:keys[i]}})
+                            
 
-                            setEmail("")
-                            setPassword("")
-
+                          
 
 
                         }
@@ -114,11 +118,13 @@ const signin = (email, password, setEmail, setPassword) => {
                 alert("Email not Verified!")
                 setEmail("")
                 setPassword("")
+                setClassName("")
             }
         }).catch(() => {
             alert("Wrong Credentials!")
             setEmail("")
             setPassword("")
+            setClassName("")
         })
 
 
@@ -250,7 +256,7 @@ const carFetch = (dispatch) => {
    
 
     }
-    const signinVendor=(email, password, setEmail, setPassword)=>{
+    const signinVendor=(email, password, setEmail, setPassword,setClassName)=>{
        
             return async (dispatch) => {
         
@@ -272,9 +278,11 @@ const carFetch = (dispatch) => {
                                 if (emails[i] === email && passwords[i] == password) {
                                     flag = true
                                     alert("Login Successfull!")
-                                    dispatch({ type:"VENDOR_LOGGED_IN", data:{name:names[i],uid:key[i]}})
                                     setEmail("")
                                     setPassword("")
+                                    setClassName("")
+                                    dispatch({ type:"VENDOR_LOGGED_IN", data:{name:names[i],uid:key[i]}})
+                                  
     
         
                                 }

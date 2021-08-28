@@ -167,7 +167,7 @@ return (
 
   </>
   :
- <Loader/>
+ <Loader from="Hotels"/>
  
 )
 }

@@ -178,7 +178,7 @@ function Cars({ getCars, carData, userData,venderData }) {
       
 
     </>
- :<Loader/> )
+ :<Loader from="Cars" /> )
 
 }
 

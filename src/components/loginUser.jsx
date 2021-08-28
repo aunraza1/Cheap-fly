@@ -2,22 +2,28 @@ import { useState } from 'react'
 import '../assets/style.css'
 import {connect} from 'react-redux'
 import { signin } from '../store/actions'
+import Loader from './loader'
 
 function Login({signin}){
 
-
+    const [className,setclassName]=useState("")
     const [email,setEmail]=useState("")
     const [password,setPassword]=useState("")
 
 
 
+
     const Login=()=>{
         if(email!=="" && password!==""){
+
+            setclassName("spinner-border spinner-border-sm")
+           signin(email,password,(data)=>setEmail(data),(data)=>setPassword(data),(data)=>setclassName(data))
           
-           signin(email,password,(data)=>setEmail(data),(data)=>setPassword(data))
         }
         else{
-            alert("Fields can't be empty")
+            alert("Fields can't be empty") 
+            
+      
         }
     }
 
@@ -30,7 +36,11 @@ function Login({signin}){
         
           <input value ={email}onChange={(e)=>setEmail(e.target.value)} type="text" name="email" placeholder="E-mail" />
           <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password" name="password" placeholder="Password" />
-          <input onClick={()=>Login()} type="submit" value="Login In"/>
+          <button  onClick={()=>Login()} className="btn btn-success" type="submit" value="Login">
+          <span className={className} role="status" aria-hidden="true" /> Login
+          </button>
+    
+          
          
         </div>
       </div>
@@ -45,7 +55,7 @@ const mapStateToProps=(state)=>({
 })
 
 const mapDispatchToProps=(dispatch)=>({
-    signin:(email,password,setEmail,setPassword)=>dispatch(signin(email,password,setEmail,setPassword))
+    signin:(email,password,setEmail,setPassword,setClassName)=>dispatch(signin(email,password,setEmail,setPassword,setClassName))
 
 })
 export default connect(mapStateToProps,mapDispatchToProps) (Login)
