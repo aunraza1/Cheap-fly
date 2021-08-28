@@ -11,6 +11,7 @@ import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import HotelDialog from './SharedComponent/hotelDialog';
+import { Link } from 'react-router-dom';
 import Loader from './loader'
 import {
   Grid,
@@ -77,8 +78,15 @@ const filterValue=(e)=>{
 
 }
 return (
+  
   hotelData.length?
   <>
+         <div className="mu-logo-area">
+                {/* text based logo */}
+                <Link to="/"className="mu-logo" ><span>Cheap Fly</span></Link>
+                {/* Image based logo */}
+                {/* <a class="mu-logo" href="index.html"><img src="assets/images/logo.jpg" alt="logo img"></a> */}
+              </div>
       
       <div style={{width:700, height:100,margin:'0 auto'}} className="input-group">
         <input style={{marginTop:40,borderWidth:2,borderColor:'blue',borderRadius:20,height:50}} onChange={(e)=>filterValue(e)} type="search" className="form-control " placeholder="Search by Price,Ratings,and Location" aria-label="Search" aria-describedby="search-addon" />

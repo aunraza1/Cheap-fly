@@ -266,6 +266,7 @@ iframe {
 	display: inline;
 	float: left;
 	width: 50%;
+	
 }
 
 .mu-logo {
@@ -482,6 +483,7 @@ iframe {
 
 .my-why-us-single-icon {
 	border: 1px solid #ccc;
+	background-color: white;
 	font-size: 30px;
 	display: inline-block;
 	width: 85px;

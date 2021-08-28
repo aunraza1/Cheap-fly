@@ -2,6 +2,7 @@ import { useState } from 'react'
 import '../assets/style.css'
 import {connect} from 'react-redux'
 import { signinVendor } from '../store/actions'
+import {Link} from 'react-router-dom'
 import {useHistory} from 'react-router-dom';
 function LoginVendor ({signinVendor}){
     const history = useHistory();
@@ -25,7 +26,9 @@ function LoginVendor ({signinVendor}){
 
     return(
         <>
+               
          <div id="login-box">
+    
         <div className="left">
           <h1 style={{fontSize: 45, fontWeight: 300}}>Vendor Login</h1>
           <p style={{width: '100%'}}>Welcome! Please fill email and password to login into your account</p>

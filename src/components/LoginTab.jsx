@@ -4,6 +4,7 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import LoginUser from './loginUser'
 import LoginVendor from './loginVendor';
+import {Link} from 'react-router-dom'
 
 
 function LoginTab (){
@@ -13,7 +14,15 @@ function LoginTab (){
       setValue(newValue);
     };
     return(
+      
         <div id='login-div'>
+
+<div className="mu-logo-area">
+                {/* text based logo */}
+                <Link to="/"className="mu-logo" ><span>Cheap Fly</span></Link>
+                {/* Image based logo */}
+                {/* <a class="mu-logo" href="index.html"><img src="assets/images/logo.jpg" alt="logo img"></a> */}
+              </div>
        <Paper square >
       <Tabs
         value={value}

@@ -12,9 +12,10 @@ import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonIcon from '@material-ui/icons/Person';
 import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 
+
 function Header({ reference, click, loggedUser, venderData }) {
 
-function Header({ reference, click, loggedUser, venderData, }) {
+
 
 
   useEffect(() => {
@@ -26,15 +27,14 @@ function Header({ reference, click, loggedUser, venderData, }) {
   console.log(click)
   return (
     <>
-
-      <header ref={reference} id="mu-hero">
+           <header ref={reference} id="mu-hero">
         <div className="container">
           <div className="mu-hero-area">
             <div className="mu-hero-top">
               {/* Start center Logo */}
               <div className="mu-logo-area">
                 {/* text based logo */}
-                <a className="mu-logo" href="index.html"><span>Cheap Fly</span></a>
+                <Link to="/"className="mu-logo" ><span>Cheap Fly</span></Link>
                 {/* Image based logo */}
                 {/* <a class="mu-logo" href="index.html"><img src="assets/images/logo.jpg" alt="logo img"></a> */}
               </div>
@@ -85,9 +85,9 @@ function Header({ reference, click, loggedUser, venderData, }) {
           
             <div className="mu-hero-featured-area">
               <div className="mu-hero-featured-content">
-                <h2>Welcome to Cheap Fly </h2>
+                <h2>Welcome to Cheap Trip </h2>
                 <h1>WE PROVIDE WITH THE BEST</h1>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque ut omnis beatae quam quibusdam facere expedita explicabo eaque non sit. Amet vitae exercitationem ad rerum consequuntur numquam magni nemo dolorem, itaque eius perferendis praesentium consequatur. Dolores, nihil, molestiae sunt tenetur aut similique nostrum deleniti amet minima. Esse magnam inventore, ea.</p>
+               
                <div style={{display:'flex',justifyContent:'space-evenly'}} >
 
                 <div className="my-why-us-single-icon">
@@ -121,10 +121,11 @@ function Header({ reference, click, loggedUser, venderData, }) {
           </div>
         </div>
       </header>
+     
     </>
   );
 }
-}
+
 
 const mapStateToProps = (state) => ({
   loggedUser: state.loggedUser,
