@@ -1753,13 +1753,27 @@ iframe {
 *:focus {
   outline: none;
 }
+#login-div {
+	background-image: url('../assets/images/login2.jpg');
+	height: 100%; 
+	width: 100%;
+    /* Center and scale the image nicely */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+
+}
+#root{
+	
+	height:1040px
+}
 #login-box {
 	position: relative;
 	margin: 5% auto;
 	width: 600px;
 	height: 400px;
-	background: #FFF;
-	border-radius: 2px;
+	background: #F8F8F8;
+	border-radius: 15px;
 	box-shadow: 0 2px 4px rgba(0, 0, 0, 0.4);
   }
   .left {
@@ -1768,7 +1782,7 @@ iframe {
 	left: 0;
 	box-sizing: border-box;
 	padding: 40px;
-	width: 300px;
+	width: 400px;
 	height: 400px;
   }
   

@@ -13,23 +13,24 @@ function LoginTab (){
       setValue(newValue);
     };
     return(
-        <>
-       <Paper square>
+        <div id='login-div'>
+       <Paper square >
       <Tabs
         value={value}
         indicatorColor="primary"
         textColor="primary"
+        style={{backgroundColor: '	#F5F5F5'}}
         onChange={handleChange}
         aria-label="disabled tabs example"
+        centered
       >
         <Tab label="User Login" />
         <Tab label="Vendor Login" />
       </Tabs>
     </Paper>
+    
     {value==0?<LoginUser/>:<LoginVendor/>}
-   
-  
-        </>
+    </div>
     )
 
 }

@@ -11,6 +11,7 @@ import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
+import Loader from './loader'
 
 import {
   Grid,
@@ -75,6 +76,7 @@ function Cars({ getCars, carData, userData,venderData }) {
 
  
   return (
+    carData.length?
     <>
           <div style={{width:400}} className="input-group">
         <input onChange={(e)=>filterValue(e)} type="search" className="form-control rounded" placeholder="Search by Car,Price,and Location" aria-label="Search" aria-describedby="search-addon" />
@@ -176,7 +178,7 @@ function Cars({ getCars, carData, userData,venderData }) {
       
 
     </>
-  )
+ :<Loader from="Cars" /> )
 
 }
 
