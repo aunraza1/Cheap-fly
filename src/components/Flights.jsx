@@ -3,9 +3,7 @@ import '../assets/style.css'
 
 function Flights(){
 
-
-
-
+  
 
     return(
         <div id="bookings" className="sections">
@@ -15,7 +13,7 @@ function Flights(){
               <div className="booking-forms">
                 <form>
                   <div className="form-group">
-                    <div className="form-checkbox">
+                    {/* <div className="form-checkbox">
                       <label htmlFor="roundtrip">
                         <input type="radio" id="roundtrip" name="flight-type" />
                         <span />Roundtrip
@@ -91,7 +89,7 @@ function Flights(){
                         </select>
                         <span className="select-arrow" />
                       </div>
-                    </div>
+                    </div> */}
                     <div className="col-md-3">
                       <div className="form-btn">
                         <button className="submit-btn">Show flights</button>
