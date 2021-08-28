@@ -34,7 +34,7 @@ function HotelBooking({getHotelsfromVendors,hotelData,loggedUser,venderData}){
   const [toggleOpen, setToggleOpen] = useState(false);
   const [searchArray,setSearchArray]=useState([])
   const [message,setMessage]=useState()
-  const [loading,setLoading]=useState(true)
+  const [messageColor,setColor]=useState('white')
 useEffect(()=>{
     getHotelsfromVendors()
   
@@ -46,7 +46,7 @@ const filterValue=(e)=>{
   var newArray=hotelData.filter((item)=>{
     if(item.singlePrice <=parseInt(e.target.value)
      || item.hotelRatings == parseInt(e.target.value)
-      || item.hotelLocation==e.target.value){
+      || item.hotelLocation.toUpperCase()==e.target.value.toUpperCase()){
       return true
      
     }
@@ -56,15 +56,19 @@ const filterValue=(e)=>{
 
 
   setMessage("Oops No Match Found!")
-  setTimeout(()=>{
-     setMessage("")
-  },5000)
+  setColor('red')
+  // setTimeout(()=>{
+  //    setMessage("")
+    
+  // },5000)
   }
   else{
     setMessage("Match Found!")
-    setTimeout(()=>{
-      setMessage("")
-   },5000)
+    setColor('green')
+  //   setTimeout(()=>{
+  //     setMessage("")
+      
+  //  },5000)
   }
 
   console.log(newArray)
@@ -76,11 +80,11 @@ return (
   hotelData.length?
   <>
       
-      <div style={{width:400}} className="input-group">
-        <input onChange={(e)=>filterValue(e)} type="search" className="form-control rounded" placeholder="Search by Price,Ratings,and Location" aria-label="Search" aria-describedby="search-addon" />
-        
+      <div style={{width:700, height:100,margin:'0 auto'}} className="input-group">
+        <input style={{marginTop:40,borderWidth:2,borderColor:'blue',borderRadius:20,height:50}} onChange={(e)=>filterValue(e)} type="search" className="form-control " placeholder="Search by Price,Ratings,and Location" aria-label="Search" aria-describedby="search-addon" />
+
       </div>
-      <div>{message}</div>
+      <h4 style={{color:messageColor,textAlign:'center',fontFamily:'cursive'}}>{message}</h4>
 
 
     <div className={classes.rootDiv} style={{margin: '3%',}} >

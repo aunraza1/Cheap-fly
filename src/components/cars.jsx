@@ -35,6 +35,7 @@ function Cars({ getCars, carData, userData,venderData }) {
   const [bookingData, setBookingData] = useState();
   const [searchArray,setSearchArray]=useState([])
   const [message,setMessage]=useState()
+  const [messageColor,setColor]=useState('white')
   const classes = useStyles();
   useEffect(() => {
     getCars()
@@ -45,8 +46,8 @@ function Cars({ getCars, carData, userData,venderData }) {
 
     var newArray=carData.filter((item)=>{
       if(item.hourlyRate <=parseInt(e.target.value)
-       || item.carName == e.target.value
-        || item.location==e.target.value){
+       || item.carName.toUpperCase() == e.target.value.toUpperCase()
+        || item.location.toUpperCase()==e.target.value.toUpperCase()){
         return true
        
       }
@@ -56,15 +57,17 @@ function Cars({ getCars, carData, userData,venderData }) {
   
   
     setMessage("Oops No Match Found!")
-    setTimeout(()=>{
-       setMessage("")
-    },5000)
+    setColor('red')
+    // setTimeout(()=>{
+    //    setMessage("")
+    // },5000)
     }
     else{
       setMessage("Match Found!")
-      setTimeout(()=>{
-        setMessage("")
-     },5000)
+      setColor('green')
+    //   setTimeout(()=>{
+    //     setMessage("")
+    //  },5000)
     }
   
     console.log(newArray)
@@ -78,11 +81,11 @@ function Cars({ getCars, carData, userData,venderData }) {
   return (
     carData.length?
     <>
-          <div style={{width:400}} className="input-group">
-        <input onChange={(e)=>filterValue(e)} type="search" className="form-control rounded" placeholder="Search by Car,Price,and Location" aria-label="Search" aria-describedby="search-addon" />
-        
+         <div style={{width:700, height:100,margin:'0 auto'}} className="input-group">
+        <input style={{marginTop:40,borderWidth:2,borderColor:'blue',borderRadius:20,height:50}} onChange={(e)=>filterValue(e)} type="search" className="form-control " placeholder="Search by Car,Price,and Location" aria-label="Search" aria-describedby="search-addon" />
+
       </div>
-      <div>{message}</div>
+      <h4 style={{color:messageColor,textAlign:'center',fontFamily:'cursive'}}>{message}</h4>
 
       <div className={classes.rootDiv} style={{margin: '3%',}} >
         <Grid

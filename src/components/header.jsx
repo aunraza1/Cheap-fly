@@ -1,4 +1,7 @@
 import React from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faBed, faPlane, faCar, faHiking } from '@fortawesome/free-solid-svg-icons'
+import { useHistory } from "react-router-dom";
 import '../assets/style.css'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
@@ -11,6 +14,7 @@ import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
 
 function Header({ reference, click, loggedUser, venderData }) {
 
+function Header({ reference, click, loggedUser, venderData, }) {
 
 
   useEffect(() => {
@@ -18,7 +22,7 @@ function Header({ reference, click, loggedUser, venderData }) {
     console.log("VENDOR_DATA", venderData)
 
   })
-
+  const history = useHistory();
   console.log(click)
   return (
     <>
@@ -37,10 +41,10 @@ function Header({ reference, click, loggedUser, venderData }) {
               {/* End center Logo */}
               <div className="mu-hero-top-info">
                 <ul>
-                  {/* <li>
+                   <li>
                     <i className="fa fa-envelope" aria-hidden="true" />
                     <span>{loggedUser != "" ? loggedUser.name : "Please Login"}</span>
-                  </li> */}
+                  </li>
 
                   <li>
                     <div className="mu-telephone">
@@ -78,30 +82,49 @@ function Header({ reference, click, loggedUser, venderData }) {
                 </ul>
               </div>
             </div>
-            {/* Start hero featured area */}
+          
             <div className="mu-hero-featured-area">
               <div className="mu-hero-featured-content">
                 <h2>Welcome to Cheap Fly </h2>
                 <h1>WE PROVIDE WITH THE BEST</h1>
                 <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque ut omnis beatae quam quibusdam facere expedita explicabo eaque non sit. Amet vitae exercitationem ad rerum consequuntur numquam magni nemo dolorem, itaque eius perferendis praesentium consequatur. Dolores, nihil, molestiae sunt tenetur aut similique nostrum deleniti amet minima. Esse magnam inventore, ea.</p>
-                <Link to="Flights" className="mu-book-now-btn">Lets Fly Cheap! </Link>
-                {(loggedUser?.uid) ? (<Link to='bookcar' className="mu-book-now-btn">Book Your Car!</Link>) : <Link to='#' className="mu-book-now-btn">Book Your Car!</Link>}
+               <div style={{display:'flex',justifyContent:'space-evenly'}} >
 
-                <Link to="hotelBooking" className="mu-book-now-btn">Need a place to saty ?!</Link>
-                <Link onClick={click} className="mu-book-now-btn">Bored ? Come Enjoy with us !</Link>
+                <div className="my-why-us-single-icon">
+                  <FontAwesomeIcon onClick={()=>history.push('Flights')} icon={faPlane} color="blue" />
+                 
+                 
+                </div>
+
+                <div className="my-why-us-single-icon">
+                  <FontAwesomeIcon icon={faBed} color="green"onClick={()=>history.push('hotelBooking')} />
+                </div>
+
+                <div className="my-why-us-single-icon">
+                  <FontAwesomeIcon icon={faCar} color="red" onClick={()=>history.push('bookcar')} />
+                </div>
+
+                <div className="my-why-us-single-icon" onClick={()=>click()}>
+                  <FontAwesomeIcon icon={faHiking} color="orange" />
+                </div>
+                </div>
+          
+       
                 <div className="mu-scrolldown-area">
                   <a href="#mu-about" className="mu-scrolldown" id="mu-scrolldown"><i className="fa fa-chevron-down" aria-hidden="true" /></a>
                 </div>
               </div>
             </div>
-            {/* End hero featured area */}
+
+
+            
           </div>
         </div>
       </header>
     </>
   );
 }
-
+}
 
 const mapStateToProps = (state) => ({
   loggedUser: state.loggedUser,
@@ -110,4 +133,3 @@ const mapStateToProps = (state) => ({
 })
 
 export default connect(mapStateToProps, null)(Header);
-
