@@ -5,9 +5,7 @@ import PendingBookings from './components/UserBookings/pendingBookings'
 
 
 function App() {
-  useEffect(() => {
-    document.title = "Cheap Fly"
-  }, [])
+
   return (
    <>
 <Routes/>

@@ -94,11 +94,16 @@ const useStyles = makeStyles(theme =>({
         })
     }, [openDialog])
     const handleSubmit = (event) => {
+
+        if(bookingValues.userDetails){
         event.preventDefault();
         optionValues(dialogValue)
         handleClose();
         applyBooking(dialogValue)
-
+        }
+        else{
+            alert("Please Login to Book Hotel")
+        }
   
 
 

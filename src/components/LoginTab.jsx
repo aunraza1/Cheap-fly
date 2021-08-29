@@ -14,15 +14,22 @@ function LoginTab (){
       setValue(newValue);
     };
     return(
+      <>
+
       
-        <div id='login-div'>
+    
 
 <div className="mu-logo-area">
                 {/* text based logo */}
                 <Link to="/"className="mu-logo" ><span>Cheap Fly</span></Link>
                 {/* Image based logo */}
                 {/* <a class="mu-logo" href="index.html"><img src="assets/images/logo.jpg" alt="logo img"></a> */}
-              </div>
+            </div>
+
+            
+              <div id="login-div">
+            
+             
        <Paper square >
       <Tabs
         value={value}
@@ -40,6 +47,9 @@ function LoginTab (){
     
     {value==0?<LoginUser/>:<LoginVendor/>}
     </div>
+ 
+      </>
+    
     )
 
 }

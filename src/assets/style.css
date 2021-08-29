@@ -31,6 +31,7 @@ Version: 1.0
 body,
 html {
 	overflow-x:hidden;
+	height: 100%;
 }
 
 ul {
@@ -1755,24 +1756,20 @@ iframe {
 *:focus {
   outline: none;
 }
+
 #login-div {
 	background-image: url('../assets/images/login2.jpg');
-	height: 100%; 
-	width: 100%;
-    /* Center and scale the image nicely */
-    background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
+	height:1000px; 
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	background-size: cover;
+}
 
-}
-#root{
-	
-	height:1040px
-}
 #login-box {
 	position: relative;
 	margin: 5% auto;
-	width: 600px;
+	width: 500px;
 	height: 400px;
 	background: #F8F8F8;
 	border-radius: 15px;

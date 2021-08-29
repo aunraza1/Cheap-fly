@@ -85,10 +85,15 @@ const useStyles = makeStyles(theme =>({
         })
     }, [openDialog])
     const handleSubmit = (event) => {
+        if(bookingValues.userDetails){
         event.preventDefault();
         optionValues({...dialogValue, totalAmount: dialogValue?.hourlyRate * dialogValue?.duration})
         handleClose();
         applyBooking(dialogValue)
+        }
+        else{
+            alert("Please Login to Book Car")
+        }
     };
     return (
         <>
@@ -210,7 +215,7 @@ const useStyles = makeStyles(theme =>({
                             id="description"
                             value={dialogValue.userName}
                             multiline={true}
-                            disabled={dialogValue?.userName ? true : false}
+                            disabled={true}
                             required
                             onChange={(event) =>
                                 setDialogValue({
