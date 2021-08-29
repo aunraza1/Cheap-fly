@@ -6,11 +6,15 @@ import '../assets/style.css'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { useEffect } from 'react'
-import Button from '@material-ui/core/Button';
 import Dropdown from 'react-bootstrap/Dropdown'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonIcon from '@material-ui/icons/Person';
-import NotificationsNoneIcon from '@material-ui/icons/NotificationsNone';
+import EmailIcon from '@material-ui/icons/Email';
+import DataUsageIcon from '@material-ui/icons/DataUsage';
+import Logo from '../assets/images/logo-removebg-preview.png'
+import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
+import LockOpenIcon from '@material-ui/icons/LockOpen';
+
 
 
 function Header({ reference, click, loggedUser, venderData }) {
@@ -33,37 +37,14 @@ function Header({ reference, click, loggedUser, venderData }) {
             <div className="mu-hero-top">
               {/* Start center Logo */}
               <div className="mu-logo-area">
-                {/* text based logo */}
-                <Link to="/"className="mu-logo" ><span>Cheap Fly</span></Link>
-                {/* Image based logo */}
-                {/* <a class="mu-logo" href="index.html"><img src="assets/images/logo.jpg" alt="logo img"></a> */}
+               <Link to="/" className="mu=logo"> 
+              <img height="120"  width="120" src={Logo} />
+              </Link>
               </div>
               {/* End center Logo */}
               <div className="mu-hero-top-info">
                 <ul>
-                   <li>
-                    <i className="fa fa-envelope" aria-hidden="true" />
-                    <span>{loggedUser != "" ? loggedUser.name : "Please Login"}</span>
-                  </li>
-
-                  <li>
-                    <div className="mu-telephone">
-
-                      <Link to="/Vendor"> <span>Become a vendor</span></Link>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="mu-telephone">
-
-                      <Link to="/Signup"><span>Create Account</span></Link>
-                    </div>
-                  </li>
-                  <li>
-                    <div className="mu-telephone">
-
-                      <Link to="/Signin"><span>Login</span></Link>
-                    </div>
-                  </li>
+                
                   <li style={{marginTop: '-1%'}}>
                     <Dropdown  className="d-inline " autoClose="inside">
                       <Dropdown.Toggle color='#f50' id="dropdown-autoclose-inside">
@@ -71,8 +52,15 @@ function Header({ reference, click, loggedUser, venderData }) {
                       </Dropdown.Toggle>
 
                       <Dropdown.Menu>
-                        <Dropdown.Item><PersonIcon fontSize='small' /><span style={{ marginLeft: '5%' }}>{loggedUser != "" ? loggedUser.name : venderData != "" ? venderData.name : "Please Login"}</span></Dropdown.Item>
-                        <Dropdown.Item><NotificationsNoneIcon fontSize='small' />{loggedUser != "" ? <Link to="/allbookings"><span style={{ marginLeft: '5%' }}>My Bookings</span></Link> : venderData != "" ? <Link to="/requests"><span style={{ marginLeft: '5%' }}>My Requests</span></Link> : <span style={{ marginLeft: '5%' }}>No Request</span>}</Dropdown.Item>
+                      <Dropdown.Item><LockOpenIcon fontSize='small' /><span style={{ marginLeft: '5%' }}>{loggedUser != "" ? loggedUser.name : venderData != "" ? venderData.name : <Link to='signin'>Login</Link>}</span></Dropdown.Item>
+                      {(loggedUser==""&&venderData=="")?
+                      <Dropdown.Item><PersonIcon fontSize='small' /><Link to="SignUp">Create Account</Link></Dropdown.Item>:null} 
+                      {loggedUser!==""?
+                      <Dropdown.Item> <DataUsageIcon fontSize="small"/> <Link to="allBookings">My Bookings</Link></Dropdown.Item>
+                      :venderData != ""?<Dropdown.Item> <EmailIcon fontSize="small"/> <Link to="requests">My Requests</Link></Dropdown.Item>:null}
+
+                      {venderData!==""?
+                        <Dropdown.Item> <BusinessCenterIcon fontSize='small'/> <Link to="/Vendor">Add Your Services</Link></Dropdown.Item>:null}
                       </Dropdown.Menu>
                     </Dropdown>
 
