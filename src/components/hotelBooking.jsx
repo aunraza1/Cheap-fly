@@ -12,6 +12,7 @@ import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import HotelDialog from './SharedComponent/hotelDialog';
 import { Link } from 'react-router-dom';
+import Logo from '../assets/images/logo-removebg-preview.png'
 import Loader from './loader'
 import {
   Grid,
@@ -81,11 +82,10 @@ return (
   
   hotelData.length?
   <>
-         <div className="mu-logo-area">
-                {/* text based logo */}
-                <Link to="/"className="mu-logo" ><span>Cheap Fly</span></Link>
-                {/* Image based logo */}
-                {/* <a class="mu-logo" href="index.html"><img src="assets/images/logo.jpg" alt="logo img"></a> */}
+          <div className="mu-logo-area">
+               <Link to="/" className="mu=logo"> 
+              <img height="120"  width="120" src={Logo} />
+              </Link>
               </div>
       
       <div style={{width:700, height:100,margin:'0 auto'}} className="input-group">
