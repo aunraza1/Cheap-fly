@@ -73,8 +73,7 @@ function Header({ reference, click, loggedUser, venderData }) {
           
             <div className="mu-hero-featured-area">
               <div className="mu-hero-featured-content">
-                <h2>Welcome to Cheap Trip </h2>
-                <h1>WE PROVIDE WITH THE BEST</h1>
+                <h1 style={{color: '#f50'}}>WE PROVIDE WITH THE BEST</h1>
                
                <div style={{display:'flex',justifyContent:'space-evenly'}} >
 

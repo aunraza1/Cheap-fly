@@ -13,7 +13,11 @@ import Typography from '@material-ui/core/Typography';
 import HotelDialog from './SharedComponent/hotelDialog';
 import { Link } from 'react-router-dom';
 import Logo from '../assets/images/logo-removebg-preview.png'
+import HotelIcon from '@material-ui/icons/Hotel';
 import Loader from './loader'
+import StarIcon from '@material-ui/icons/Star';
+import LocationOnRoundedIcon from '@material-ui/icons/LocationOnRounded';
+import AttachMoneyRoundedIcon from '@material-ui/icons/AttachMoneyRounded';
 import {
   Grid,
 } from '@material-ui/core/'
@@ -78,6 +82,21 @@ function HotelBooking({ getHotelsfromVendors, hotelData, loggedUser, venderData 
 
 
   }
+  function addState(r){
+    var rating = []
+  for(var i=1; i<=r; i++){
+    rating.push(i)
+  }
+  return (
+    <>
+    {rating && rating.map((v,i)=>(
+      <StarIcon style={{color: 'gold'}} fontSize='large' /> 
+  ))}
+    
+    </>
+  )
+
+  }
   return (
 
     hotelData.length ?
@@ -117,12 +136,18 @@ function HotelBooking({ getHotelsfromVendors, hotelData, loggedUser, venderData 
                         title="Contemplative Reptile"
                       />
                       <CardContent>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {`Hotel Name:${v?.hotelName}`}
-                        </Typography>
-                        <Typography gutterBottom variant="h5" component="h2">
-                          {`Hotel Ratings:${v?.hotelRatings} ⭐`}
-                        </Typography>
+                      <Typography gutterBottom variant="h5" component="h2">
+                      <HotelIcon color='secondary' fontSize='large' />  {v?.hotelName} 
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="h2">
+                      <LocationOnRoundedIcon color='secondary' fontSize='large' />  {v?.hotelLocation} 
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="h2">
+                      <AttachMoneyRoundedIcon color='secondary' fontSize='large' />  {`${v?.singlePrice}/Pkr Day `} 
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {addState(v?.hotelRatings)}
+                      </Typography>
                       </CardContent>
                     </CardActionArea>
                     <CardActions style={{backgroundColor: '#f50', alignItems: 'center', justifyContent: 'center'}}>
@@ -139,8 +164,9 @@ function HotelBooking({ getHotelsfromVendors, hotelData, loggedUser, venderData 
 
             }) : hotelData && hotelData.map((v, i) => (
               <Grid item xs={12} sm={12} md={3} key={i}>
-             
+      
                 <Card >
+                  {console.log(v)}
                   <CardActionArea>
                     <CardMedia
                       className={classes.media}
@@ -149,10 +175,16 @@ function HotelBooking({ getHotelsfromVendors, hotelData, loggedUser, venderData 
                     />
                     <CardContent>
                       <Typography gutterBottom variant="h5" component="h2">
-                        {`Hotel Name:${v?.hotelName}`}
+                      <HotelIcon color='secondary' fontSize='large' />  {v?.hotelName} 
                       </Typography>
                       <Typography gutterBottom variant="h5" component="h2">
-                        {`Hotel Ratings:${v?.hotelRatings} ⭐`}
+                      <LocationOnRoundedIcon color='secondary' fontSize='large' />  {v?.hotelLocation} 
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="h2">
+                      <AttachMoneyRoundedIcon color='secondary' fontSize='large' />  {`${v?.singlePrice}/Pkr Day `} 
+                      </Typography>
+                      <Typography gutterBottom variant="h5" component="h2">
+                        {addState(v?.hotelRatings)}
                       </Typography>
                     </CardContent>
                   </CardActionArea>

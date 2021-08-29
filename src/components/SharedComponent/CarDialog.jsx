@@ -85,7 +85,7 @@ const useStyles = makeStyles(theme =>({
         })
     }, [openDialog])
     const handleSubmit = (event) => {
-        if(bookingValues.userDetails){
+        if(userDetails){
         event.preventDefault();
         optionValues({...dialogValue, totalAmount: dialogValue?.hourlyRate * dialogValue?.duration})
         handleClose();
