@@ -41,12 +41,13 @@ function SignUpVendor(){
         
         <div id="login-box">
         <div className="left">
-          <h1>Vendor</h1>
+        <h1 style={{fontSize: 45, fontWeight: 300}}>User Sign Up</h1>
+        <p style={{width: '100%'}}>Welcome! Sign Up to start your new journey</p>
           <input value={userName} onChange={(e)=>setName(e.target.value)} type="text" name="username" required placeholder="Username" />
           <input value ={email}onChange={(e)=>setEmail(e.target.value)} type="text" name="email" required placeholder="E-mail" />
           <input value={password} onChange={(e)=>setPassword(e.target.value)} type="password"  required name="password" placeholder="Password" />
           <input value ={rePass}onChange={(e)=>setRePass(e.target.value)} type="password" required name="password2" placeholder="Retype password" />
-             <button  onClick={()=>createUser()} className="btn btn-success" type="submit" value="Sign Up">
+             <button style={{width: '70%', backgroundColor: '#f50', borderRadius: 8}}  onClick={()=>createUser()} className="btn btn-success" type="submit" value="Sign Up">
           <span className={className} role="status" aria-hidden="true" /> Sign Up
           </button>
          
