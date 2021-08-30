@@ -389,7 +389,8 @@ const carFetch = (dispatch) => {
                      tours.push(child.val())
 
                  })
-                   console.log(tours)
+                 dispatch({type:"TOUR_DATA",data:tours})
+                
              })
          }
      }

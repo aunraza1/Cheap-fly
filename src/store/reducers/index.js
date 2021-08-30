@@ -5,7 +5,8 @@ const INITIAL_STATE={
     venderData:"",
     bookings:"",
     approvedBookings:"",
-    allRequests:""
+    allRequests:"",
+    tourData:[],
 
 }
 
@@ -58,6 +59,11 @@ export default (state = INITIAL_STATE, action) => {
                     ...state,allRequests:action.data
                 }
             )
+
+        case "TOUR_DATA":
+            return({
+                  ...state,tourData:action.data
+            })
         default:
             return state
     }
