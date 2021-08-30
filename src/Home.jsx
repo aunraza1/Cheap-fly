@@ -21,7 +21,7 @@ function Home({loggedUser,venderData}){
 
     })
 
-    const scrollToDiv = (ref) => window.scrollTo(0, ref.current.offsetTop);
+   const scrollToDiv = (ref) => window.scrollTo(0, ref.current.offsetTop);
    const headers=useRef(null)
    const tours =useRef(null)
     

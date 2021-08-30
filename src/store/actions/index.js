@@ -99,6 +99,7 @@ const signin = (email, password, setEmail, setPassword,setClassName) => {
                         if (emails[i] === email && passwords[i] == password) {
                             flag = true
                             dispatch({ type:"LOGGED_IN", data:{name:names[i],uid:keys[i]}})
+                            dispatch({type:'VENDOR_LOGGED_IN', data:""})
                             
 
                           
@@ -282,6 +283,7 @@ const carFetch = (dispatch) => {
                                     setPassword("")
                                     setClassName("")
                                     dispatch({ type:"VENDOR_LOGGED_IN", data:{name:names[i],uid:key[i]}})
+                                    dispatch({type:"LOGGED_IN" ,data:""})
                                   
     
         
@@ -367,7 +369,30 @@ const carFetch = (dispatch) => {
          
 
      }
+
+     const removeUser=()=>{
+         return(dispatch)=>{
+            dispatch({type:"LOGGED_IN",data:""})
+            dispatch({type:"VENDOR_LOGGED_IN",data:""})
+
+         }
+         
+     }
              
+
+
+     const getTourData=()=>{
+         return(dispatch)=>{
+             let tours=[]
+             firebase.database().ref('Tours/').once('value',(snapshot)=>{
+                 snapshot.forEach((child)=>{
+                     tours.push(child.val())
+
+                 })
+                   console.log(tours)
+             })
+         }
+     }
              
 
 
@@ -385,6 +410,8 @@ export {
     userBookings,
     approveduserBookings,
     venderBookings,
+    removeUser,
+    getTourData
  
   
 }

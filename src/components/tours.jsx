@@ -5,16 +5,21 @@ import France from '../assets/images/france.jpg'
 import Switzerland from '../assets/images/switzerland.jpg'
 import Italy from '../assets/images/italy.jpg'
 import England from '../assets/images/england.jpg'
-import  {useState} from 'react'
+import  {useState,useEffect} from 'react'
+import {connect} from 'react-redux'
+import{getTourData} from '../store/actions/index'
 
 
 
 
 
 
-function Tours({reference}){
+function Tours({reference,getTourData}){
 
+useEffect(() => {
+  getTourData()
 
+}, [getTourData])
 const [tours]=useState({
     swatTour:25000,
     kashmirTour:30000,
@@ -24,9 +29,13 @@ const [tours]=useState({
     mureeTour:10000
 })
 
+
+
   return(
 
     <>
+          
+    
      <section ref={reference}  id="mu-featured-tours">
         <div className="container">
           <div className="row">
@@ -36,6 +45,7 @@ const [tours]=useState({
                 <p className="mu-title-content"></p>
                 {/* Start Featured Tours content */}
                 <div className="mu-featured-tours-content">
+                 
                   <div className="row">
                     <div className="col-md-4">
                       <div className="mu-featured-tours-single">
@@ -49,66 +59,11 @@ const [tours]=useState({
                         </div>
                       </div>
                     </div>
-                    <div className="col-md-4">
-                      <div className="mu-featured-tours-single">
-                        <img src={Thailand} alt="img" height={250}  />
-                        <div className="mu-featured-tours-single-info">
-                          <h3>Kashmir</h3>
-                          <h4> 3 Days, 2 Nights</h4>
-                          <span className="mu-price-tag">{`${tours.kashmirTour}/-PKR`}</span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quidem earum sed. Sint, magnam eligendi!</p>
-                          <a href="#" className="mu-book-now-btn">Book Now</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="mu-featured-tours-single">
-                        <img src={France} alt="img"  height={250}  />
-                        <div className="mu-featured-tours-single-info">
-                          <h3>Hunza</h3>
-                          <h4> 4 Days, 3 Nights</h4>
-                          <span className="mu-price-tag">{`${tours.hunzaTour}/-PKR`}</span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quidem earum sed. Sint, magnam eligendi!</p>
-                          <a href="#" className="mu-book-now-btn">Book Now</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="mu-featured-tours-single">
-                        <img src={Switzerland} height={250} alt="img" />
-                        <div className="mu-featured-tours-single-info">
-                          <h3>Skardu</h3>
-                          <h4> 2 Days, 2 Nights</h4>
-                          <span className="mu-price-tag">{`${tours.skarduTour}/-PKR`}</span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quidem earum sed. Sint, magnam eligendi!</p>
-                          <a href="#" className="mu-book-now-btn">Book Now</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="mu-featured-tours-single">
-                        <img src={Italy} alt="img" height={250} />
-                        <div className="mu-featured-tours-single-info">
-                          <h3>Gilgit</h3>
-                          <h4> 3 Days, 2 Nights</h4>
-                          <span className="mu-price-tag">{`${tours.gilgitTour}/-PKR`}</span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quidem earum sed. Sint, magnam eligendi!</p>
-                          <a href="#" className="mu-book-now-btn">Book Now</a>
-                        </div>
-                      </div>
-                    </div>
-                    <div className="col-md-4">
-                      <div className="mu-featured-tours-single">
-                        <img src={England} alt="img"  height={250}  />
-                        <div className="mu-featured-tours-single-info">
-                          <h3>Muree</h3>
-                          <h4> 2 Days, 1 Nights</h4>
-                          <span className="mu-price-tag">{`${tours.mureeTour}/-PKR`}</span>
-                          <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. At quidem earum sed. Sint, magnam eligendi!</p>
-                          <a href="#" className="mu-book-now-btn">Book Now</a>
-                        </div>
-                      </div>
-                    </div>
+            
+         
+        
+          
+        
                   </div>
                 </div>
                 {/* End Featured Tours content */}
@@ -121,4 +76,10 @@ const [tours]=useState({
    )
 }
 
-export default Tours 
+
+
+const mapDispatchToProps=(dispatch)=>({
+  getTourData:()=>dispatch(getTourData())
+
+})
+export default connect(null,mapDispatchToProps)(Tours)

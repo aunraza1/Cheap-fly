@@ -14,13 +14,15 @@ import DataUsageIcon from '@material-ui/icons/DataUsage';
 import Logo from '../assets/images/logo-removebg-preview.png'
 import BusinessCenterIcon from '@material-ui/icons/BusinessCenter';
 import LockOpenIcon from '@material-ui/icons/LockOpen';
+import SettingsPowerIcon from '@material-ui/icons/SettingsPower';
+import {removeUser} from '../store/actions/index'
 
 
 
-function Header({ reference, click, loggedUser, venderData }) {
+function Header({ reference, click, loggedUser, venderData,removeUser }) {
 
 
-
+  
 
   useEffect(() => {
     console.log("LOGGED_USER", loggedUser)
@@ -61,6 +63,8 @@ function Header({ reference, click, loggedUser, venderData }) {
 
                       {venderData!==""?
                         <Dropdown.Item> <BusinessCenterIcon fontSize='small'/> <Link to="/Vendor">Add Your Services</Link></Dropdown.Item>:null}
+                        {(loggedUser!==""||venderData!=="")?
+                        <Dropdown.Item><SettingsPowerIcon></SettingsPowerIcon><Link onClick={()=>removeUser()}>Logout</Link></Dropdown.Item>:null}
                       </Dropdown.Menu>
                     </Dropdown>
 
@@ -73,7 +77,8 @@ function Header({ reference, click, loggedUser, venderData }) {
           
             <div className="mu-hero-featured-area">
               <div className="mu-hero-featured-content">
-                <h1 style={{color: '#f50'}}>WE PROVIDE WITH THE BEST</h1>
+               
+                <h1 style={{marginTop:40,fontFamily:'monospace',color:'black'}} >WE PROVIDE WITH THE BEST</h1>
                
                <div style={{display:'flex',justifyContent:'space-evenly'}} >
 
@@ -120,4 +125,9 @@ const mapStateToProps = (state) => ({
 
 })
 
-export default connect(mapStateToProps, null)(Header);
+const mapDispatchToProps=(dispatch)=>({
+  removeUser:()=>dispatch(removeUser())
+
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header);
