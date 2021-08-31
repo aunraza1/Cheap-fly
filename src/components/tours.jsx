@@ -1,6 +1,5 @@
 import '../assets/style.css'
-import Dubai from '../assets/images/dubai.jpg'
-import  {useState,useEffect} from 'react'
+import  {useState,useEffect,useRef} from 'react'
 import {connect} from 'react-redux'
 import{getTourData,} from '../store/actions/index'
 import {applyBooking} from '../config/api'
@@ -11,8 +10,9 @@ import {applyBooking} from '../config/api'
 
 
 
-function Tours({reference,getTourData,tourData,loggedUser}){
 
+function Tours({reference,getTourData,tourData,loggedUser}){
+  const form =useRef(null)
   const [press,setPress]=useState(false)
   const [selectedTour,setSelectedTour]=useState({
     
@@ -38,10 +38,12 @@ useEffect(() => {
 
 
 
-const selectedBooking=(values,ownerId)=>{
+const selectedBooking=(values,ownerId,form)=>{
 
 
   if(loggedUser!==""){
+
+console.log(form)
     setPress(true)
     setSelectedTour({
       ...selectedTour,tourName:values.tourName,
@@ -55,10 +57,8 @@ const selectedBooking=(values,ownerId)=>{
       userName:loggedUser.name,
       bookingStatus:false+loggedUser.uid,
       vendorRequestStatus:false+ownerId
-  
-  
-  
     })
+    scrollToDiv(form)
 
   }
   else{
@@ -96,6 +96,11 @@ const addBooking=(e)=>{
 applyBooking(selectedTour)
 
 }
+  const scrollToDiv= (ref) =>{
+ 
+  window.scrollTo(0, ref.current.offsetTop);
+  
+ }
   return(
 
     <>
@@ -125,7 +130,7 @@ applyBooking(selectedTour)
                                 <h4>{v.tourStay}</h4>
                                 <h5 style={{fontWeight:'bold',fontFamily:'cursive'}}>{`Departure Date ${v.tourStartDate}`}</h5>
                                 <span className="mu-price-tag">{`${v.tourPrice}/- PKR`}</span>
-                                <a href="#" onClick={()=>selectedBooking(tourData[i],tourData[i].ownerId)} className="mu-book-now-btn btn-success">Book Now</a>
+                                <a  onClick={()=>selectedBooking(tourData[i],tourData[i].ownerId,form)} className="mu-book-now-btn btn-success">Book Now</a>
                               </div>
                             </div>
                           
@@ -145,8 +150,9 @@ applyBooking(selectedTour)
               </div>
             </div>
           </div>
-          {press?
-          <form onSubmit={addBooking}>
+          <div ref={form}>
+           {press? 
+          <form  onSubmit={addBooking}>
         <div className="form-group">
           <label htmlFor="formGroupExampleInput">Tour Name</label>
           <input style={{width:'100%'}} type="text" disabled className="form-control" id="formGroupExampleInput" value={selectedTour?.tourName} placeholder="Tour" />
@@ -168,9 +174,10 @@ applyBooking(selectedTour)
           <label htmlFor="formGroupExampleInput2">Total Amount</label>
           <input style={{width:'100%'}} disabled type="number" required value={selectedTour?.amountPayable} className="form-control" id="formGroupExampleInput2" placeholder="Total Amount" />
         </div>
-        <input  className="ml-2 mu-book-now-btn btn-success" type="submit" value="Submit"/>
+        <input  style={{	display: 'inline-block',backgroundcolor: 'green',textTransform: 'uppercase',fontSize: 18,padding: 10,height:45,paddingRight:20,borderRadius: 25,marginTop: 30}} className="ml-2 mu-book-now-btn btn-success" type="submit" value="Book"/>
         <input onClick={()=>cancelBooking()}  className="ml-2 mu-book-now-btn btn-danger" type="button" value="Cancel"/>
       </form> :null}
+        </div>
         </div>
       </section>
 

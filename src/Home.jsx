@@ -6,7 +6,7 @@ import Video from './components/video'
 import Tours from './components/tours'
 import Clients from './components/clients'
 import {useRef} from 'react'
-import { useEffect } from 'react'
+import {useEffect} from 'react'
 import {connect} from 'react-redux'
 
 
@@ -21,7 +21,11 @@ function Home({loggedUser,venderData}){
 
     })
 
-   const scrollToDiv = (ref) => window.scrollTo(0, ref.current.offsetTop);
+   const scrollToDiv= (ref) =>{
+ 
+    window.scrollTo(0, ref.current.offsetTop);
+    
+   } 
    const headers=useRef(null)
    const tours =useRef(null)
     
