@@ -35,13 +35,15 @@ useEffect(() => {
                     </div>
                     <div className="card-body">
                     <h2 className="card-title">{v.userName}</h2>
-                      <h2 className="card-title">{v.hotelName?v.hotelName:v.carName}</h2>
-                      <h5> {v.hotelRatings?v.hotelRatings+" Star Hotel":v.carSegment+""}</h5>
-                      <h5>{v.days?v.days+" Day/s Stay":v.duration+" Hour/s"}</h5>
+                    <h2 className="card-title">{v.hotelName?v.hotelName:v.carName?v.carName:v.tourName}</h2>
+                      <h5> {v.hotelRatings?v.hotelRatings+" Star Hotel":v.carSegment?v.carSegment:"Featured Tour"}</h5>
+                      <h5>{v.days?v.days+" Day/s Stay":v.duration? v.duration+" Hour/s":v.tourStay}</h5>
                       <h5>{`${v.amountPayable?v.amountPayable:v.totalAmount} PKR Amount Payable`}</h5>
-                      <h6>{v.checkInDate?v.checkInDate+" Arriving Date":"Required on: "+v.date} </h6>
+                      <h6>{v.checkInDate?v.checkInDate+" Arriving Date": v.date?"Required on: "+v.date:"Departure "+v.tourStartDate} </h6>
                       
     
+
+                  
                     </div>
                     <div className="card-footer text-muted">
                     <p className="card-text">
