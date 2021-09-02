@@ -17,7 +17,7 @@ function Login({signin}){
         if(email!=="" && password!==""){
 
             setclassName("spinner-border spinner-border-sm")
-           signin(email,password,(data)=>setEmail(data),(data)=>setPassword(data),(data)=>setclassName(data))
+           signin(email,password,(data)=>setEmail(data),(data)=>setPassword(data),(data)=>setclassName(data),(data)=>history.push(data))
           
         }
         else{
@@ -54,7 +54,7 @@ const mapStateToProps=(state)=>({
 })
 
 const mapDispatchToProps=(dispatch)=>({
-    signin:(email,password,setEmail,setPassword,setClassName)=>dispatch(signin(email,password,setEmail,setPassword,setClassName))
+    signin:(email,password,setEmail,setPassword,setClassName,setRoute)=>dispatch(signin(email,password,setEmail,setPassword,setClassName,setRoute))
 
 })
 export default connect(mapStateToProps,mapDispatchToProps) (Login)

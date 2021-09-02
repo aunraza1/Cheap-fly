@@ -15,7 +15,7 @@ function LoginVendor ({signinVendor}){
     const Login=()=>{
         if(email!=="" && password!==""){
             setclassName("spinner-border spinner-border-sm")
-            signinVendor(email,password,(data)=>setEmail(data),(data)=>setPassword(data),(data)=>setclassName(data))
+            signinVendor(email,password,(data)=>setEmail(data),(data)=>setPassword(data),(data)=>setclassName(data),(data)=>history.push(data))
 
         }
         else{
@@ -49,7 +49,7 @@ function LoginVendor ({signinVendor}){
 
 
 const mapDispatchToProps=(dispatch)=>({
-    signinVendor:(email,password,setEmail,setPassword,setClassName)=>dispatch(signinVendor(email,password,setEmail,setPassword,setClassName))
+    signinVendor:(email,password,setEmail,setPassword,setClassName,setRoute)=>dispatch(signinVendor(email,password,setEmail,setPassword,setClassName,setRoute))
 
 })
 export default connect(null,mapDispatchToProps) (LoginVendor)

@@ -6,13 +6,9 @@ import { storage } from '../../config/firebase'
 
 const userSignup = (name, email, password, setUserName, setEmail, setPassword, setRePass,setClassName) => {
     return (dispatch) => {
-
         firebase.auth().createUserWithEmailAndPassword(email, password)
             .then(() => {
-
                 var user = firebase.auth().currentUser
-
-
                 var key = firebase.database().ref('/Users').push().key
                 let obj = {
                     uid: user.uid,
@@ -20,13 +16,10 @@ const userSignup = (name, email, password, setUserName, setEmail, setPassword, s
                     name: name,
                     email: email,
                     password: password,
-                   
-
                 }
                 firebase.database().ref('Users/' + key).set(obj).then(() => {
                     alert("Account Added! Verify yout email")
                 })
-
                 user.sendEmailVerification().then(() => {
                     alert("Verification Email sent!")
                     firebase.auth().signOut()
@@ -35,30 +28,34 @@ const userSignup = (name, email, password, setUserName, setEmail, setPassword, s
                     setPassword("")
                     setRePass("")
                     setClassName("")
-
-
-
-                })
-
-                    .catch(() => {
+                }) .catch(() => {
                         alert("Email sent Failed!")
                     })
-
-
             })
             .catch(error => {
                 if (error.code === 'auth/email-already-in-use') {
                     alert('That email address is already in use!');
-
+                    setEmail("")
+                    setUserName("")
+                    setPassword("")
+                    setRePass("")
+                    setClassName("")
                 }
-
                 if (error.code === 'auth/invalid-email') {
                     alert('That email address is invalid!');
-
+                    setEmail("")
+                    setUserName("")
+                    setPassword("")
+                    setRePass("")
+                    setClassName("")
                 }
                 if (error.code === 'auth/weak-password') {
                     alert('Password must be of atlleast 6 char');
-
+                    setEmail("")
+                    setUserName("")
+                    setPassword("")
+                    setRePass("")
+                    setClassName("")
                 }
             });
 
@@ -68,7 +65,7 @@ const userSignup = (name, email, password, setUserName, setEmail, setPassword, s
 
     }
 }
-const signin = (email, password, setEmail, setPassword,setClassName) => {
+const signin = (email, password, setEmail, setPassword,setClassName,setRoute) => {
     return async (dispatch) => {
 
 
@@ -81,7 +78,7 @@ const signin = (email, password, setEmail, setPassword,setClassName) => {
                 setEmail("")
                 setPassword("")
                 setClassName("")
-
+                setRoute('/')
 
                 var names = [];
                 var emails = [];
@@ -100,20 +97,9 @@ const signin = (email, password, setEmail, setPassword,setClassName) => {
                             flag = true
                             dispatch({ type:"LOGGED_IN", data:{name:names[i],uid:keys[i]}})
                             dispatch({type:'VENDOR_LOGGED_IN', data:""})
-                            
-
-                          
-
-
                         }
-
-
                     })
-
-
                 })
-
-
             }
             else {
                 alert("Email not Verified!")
@@ -127,26 +113,16 @@ const signin = (email, password, setEmail, setPassword,setClassName) => {
             setPassword("")
             setClassName("")
         })
-
-
     }
 }
 
-
 const addCar = (data) => {
-
-
-
     const uploadImage = storage.ref('Images/' + data.hotelImage.name).put(data.hotelImage)
     uploadImage.on("state_changed", snapshot => { }, error => {
         alert(error)
     }, () =>
-
         storage.ref("Images").child(data.hotelImage.name).getDownloadURL().then(url => {
-
-            let key = firebase.database().ref('/Cars').push().key
-
-
+           let key = firebase.database().ref('/Cars').push().key
 
             firebase.database().ref('/Cars' + key).set(data, (err) => {
                 if (err) {
@@ -173,8 +149,6 @@ const addCar = (data) => {
             })
         })
     )
-
-
 
 
 
@@ -257,7 +231,7 @@ const carFetch = (dispatch) => {
    
 
     }
-    const signinVendor=(email, password, setEmail, setPassword,setClassName)=>{
+    const signinVendor=(email, password, setEmail, setPassword,setClassName,setRoute)=>{
        
             return async (dispatch) => {
         
@@ -282,6 +256,7 @@ const carFetch = (dispatch) => {
                                     setEmail("")
                                     setPassword("")
                                     setClassName("")
+                                    setRoute('/')
                                     dispatch({ type:"VENDOR_LOGGED_IN", data:{name:names[i],uid:key[i]}})
                                     dispatch({type:"LOGGED_IN" ,data:""})
                                   
@@ -296,6 +271,7 @@ const carFetch = (dispatch) => {
                                 alert("Incorrect Email/Pass")
                                 setEmail("")
                                 setPassword("")
+                                setClassName("")
                             }
         
         

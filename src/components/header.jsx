@@ -80,12 +80,10 @@ function Header({ reference, click, loggedUser, venderData,removeUser }) {
                
                 <h1 style={{marginTop:40,fontFamily:'monospace',color:'black'}} >WE PROVIDE WITH THE BEST</h1>
                
-               <div style={{display:'flex',justifyContent:'space-evenly'}} >
+               <div className="Changes" style={{display:'flex',justifyContent:'space-evenly'}} >
 
                 <div className="my-why-us-single-icon">
                   <FontAwesomeIcon onClick={()=>history.push('Flights')} icon={faPlane} color="blue" />
-                 
-                 
                 </div>
 
                 <div className="my-why-us-single-icon">
@@ -99,6 +97,8 @@ function Header({ reference, click, loggedUser, venderData,removeUser }) {
                 <div className="my-why-us-single-icon" onClick={()=>click()}>
                   <FontAwesomeIcon icon={faHiking} color="orange" />
                 </div>
+
+
                 </div>
           
        
