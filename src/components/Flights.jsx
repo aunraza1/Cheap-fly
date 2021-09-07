@@ -1,19 +1,23 @@
 import { useEffect, useState } from 'react';
+import Italy from '../assets/images/serene.jpg'
 import '../assets/style.css'
 import { autocomplete } from 'air-port-codes-node';
+
 import axios from 'axios';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import TextField from '@material-ui/core/TextField';
 function Flights() {
   const [token, setToken] = useState();
+  const [result,setResult]=useState({})
   const [origin, setOrigin] = useState();
   const [flyingFrom, setFlyingFrom] = useState([]);
+  const [show,setShow]=useState(false)
   const [flightVal, setFlightVal] = useState({
     flyingFrom: '',
     flyingTo: '',
     departureDate: '',
     adults: null,
-    child: null,
+    child: 0,
     class: '',
     currency: 'PKR',
   })
@@ -79,13 +83,16 @@ function Flights() {
   }
   const checkFlight = (e) => {
     e.preventDefault();
+    setShow(true)
        axios({
         method: "get",
         url: `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${flightVal?.flyingFrom}&destinationLocationCode=${flightVal?.flyingTo}&departureDate=${flightVal?.departureDate}&adults=${flightVal?.adults}&children=${flightVal?.child?flightVal?.child:0}&nonStop=true&currencyCode=${flightVal?.currency}&max=5`,
         headers: { "Authorization": `Bearer ${token}` },
     })
     .then((res)=>{
-      console.log(res)
+  console.log(res.data.data[0])
+ setResult({res:res.data.data[0]})
+    
     })
     .catch((err)=>{
       console.log(err)
@@ -95,7 +102,9 @@ function Flights() {
 
 
   return (
+  
     <div id="bookings" className="sections">
+    
       <div className="sections-center">
         <div className="container">
           <div className="row">
@@ -209,12 +218,50 @@ function Flights() {
                       <button className="submit-btn" type="submit">Show flights</button>
                     </div>
                   </div>
+                  <div className="card w-75">
+     
+      </div>
                 </div>
               </form>
+     
             </div>
+            {show?
+
+
+            <div style={{borderWidth:1,borderStyle:'solid',borderColor:'black',marginTop:20}} className="card-body">
+            
+          <h5 className="card-title">{flightVal.departureDate}</h5>
+          <div className="row">
+            <div className="col-md-2">
+           <img src={Italy} height="50"  width="70" alt="" />
+            </div>
+          <div className="col-md-1  ">
+            <p>{flightVal.flyingFrom}</p>
+            
+          </div>
+          <div className="col-md-1">
+            <p>{flightVal.flyingTo}</p>
+          </div>
+          <div className="col-md-2">
+            <p>{`${flightVal.adults} Adult/s ${flightVal.child!==0? flightVal.child+"Child/s":flightVal.class}`}</p>
+          </div>
+         
+          <div className="col-md-3">
+          <p>{`${result?result.res?.numberOfBookableSeats:null} Seats Remaining`}</p>
+          </div>
+          <div className="col-md-3">
+        <p> <b style={{fontSize:15}}>{`${result?result.res?.price.total+result.res?.price.currency:null} Total Amount`}</b></p>
+          </div>
+    
+          </div>
+          <a href="#" className="btn btn-primary">Book</a>
+          <a onClick={()=>setShow(false)} className="ml-2 btn btn-primary">Cancel</a>
+  
+        </div>:null}
           </div>
         </div>
       </div>
+  
     </div>
   )
 }
