@@ -228,32 +228,61 @@ function Flights() {
             {show?
 
 
-            <div style={{borderWidth:1,borderStyle:'solid',borderColor:'black',marginTop:20}} className="card-body">
+            <div style={{borderWidth:2,borderStyle:'solid',borderColor:'black',marginTop:20,borderRadius:60}} className="card-body">
             
-          <h5 className="card-title">{flightVal.departureDate}</h5>
+         
           <div className="row">
-            <div className="col-md-2">
+            <div className="col-md-1">
            <img src={Italy} height="50"  width="70" alt="" />
             </div>
-          <div className="col-md-1  ">
+          <div className="col-md-3  ">
             <p>{flightVal.flyingFrom}</p>
             
           </div>
-          <div className="col-md-1">
+          <div className="col-md-3">
             <p>{flightVal.flyingTo}</p>
           </div>
           <div className="col-md-2">
-            <p>{`${flightVal.adults} Adult/s ${flightVal.child!==0? flightVal.child+"Child/s":flightVal.class}`}</p>
+            <p>Duration</p>
           </div>
          
-          <div className="col-md-3">
-          <p>{`${result?result.res?.numberOfBookableSeats:null} Seats Remaining`}</p>
+          <div className="col-md-1">
+          <p>Stops</p>
           </div>
-          <div className="col-md-3">
-        <p> <b style={{fontSize:15}}>{`${result?result.res?.price.total+result.res?.price.currency:null} Total Amount`}</b></p>
+          <div className="col-md-1">
+          <p>Airbus</p>
           </div>
+          <div className="col-md-1">
+          <p>Total</p>
+          </div>
+        
     
           </div>
+          <div className="row">
+          <div className="col-md-1">
+          <p>PIA</p>
+            </div>
+          <div className="col-md-3  ">
+            <p>{result?result.res?.itineraries[0].segments[0].departure.at:null}</p>
+          </div>
+          <div className="col-md-3">
+          <p>{result?result.res?.itineraries[0].segments[0].arrival.at:null}</p>
+          </div>
+          <div className="col-md-2">
+            <p>{result?result.res?.itineraries[0].segments[0].duration:null}</p>
+          </div>
+         
+          <div className="col-md-1">
+          <p>{result?result.res?.itineraries[0].segments[0].numberOfStops:null}</p>
+          </div>
+          <div className="col-md-1">
+          <p>{result?result.res?.itineraries[0].segments[0].aircraft.code:null}</p>
+          </div>
+          <div className="col-md-1">
+          <p> <b style={{fontSize:15}}>{result?result.res?.price.total+result.res?.price.currency:null}</b></p>
+          </div>
+
+         </div>
           <a href="#" className="btn btn-primary">Book</a>
           <a onClick={()=>setShow(false)} className="ml-2 btn btn-primary">Cancel</a>
   
