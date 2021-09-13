@@ -5,6 +5,7 @@ import Tab from '@material-ui/core/Tab';
 import LoginUser from './loginUser'
 import LoginVendor from './loginVendor';
 import {Link} from 'react-router-dom'
+import Logo from '../assets/images/logo-removebg-preview.png'
 
 
 function LoginTab (){
@@ -19,12 +20,11 @@ function LoginTab (){
       
     
 
-<div className="mu-logo-area">
-                {/* text based logo */}
-                <Link to="/"className="mu-logo" ><span>Cheap Fly</span></Link>
-                {/* Image based logo */}
-                {/* <a class="mu-logo" href="index.html"><img src="assets/images/logo.jpg" alt="logo img"></a> */}
-            </div>
+             <div className="mt-5 mu-logo-area">
+               <Link to="/" className="mu=logo"> 
+              <img height="120"  width="120" src={Logo} />
+              </Link>
+              </div>
 
             
               <div id="login-div">

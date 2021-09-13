@@ -46,7 +46,7 @@ const sendData=(e)=>{
                      <div className="col-sm-6">
                        <div className="form-group">
                          <span className="form-label">Hotel Name</span>
-                         <input onChange={(e)=>sethotelDetails({...hotelDetails,hotelName:e.target.value})} className="form-control" type="text" placeholder="Hotel Name" />
+                         <input required onChange={(e)=>sethotelDetails({...hotelDetails,hotelName:e.target.value})} className="form-control" type="text" placeholder="Hotel Name" />
                        </div>
                      </div>
                    
@@ -56,25 +56,25 @@ const sendData=(e)=>{
                    <div className="col-sm-3">
                    <div className="form-group">
                      <span className="form-label">Single Price</span>
-                     <input onChange={(e)=>sethotelDetails({...hotelDetails,singlePrice:e.target.value})} className="form-control" type="number" placeholder="Single Room " />
+                     <input required onChange={(e)=>sethotelDetails({...hotelDetails,singlePrice:e.target.value})} className="form-control" type="number" placeholder="Single Room " />
                    </div>
                    </div>
                    <div className="col-sm-3">
                    <div className="form-group">
                      <span className="form-label">Double  Price</span>
-                     <input onChange={(e)=>sethotelDetails({...hotelDetails,doublePrice:e.target.value})} className="form-control" type="number" placeholder="Double Room " />
+                     <input required onChange={(e)=>sethotelDetails({...hotelDetails,doublePrice:e.target.value})} className="form-control" type="number" placeholder="Double Room " />
                    </div>
                    </div>
                    <div className="col-sm-3">
                    <div className="form-group">
                      <span className="form-label">King Price</span>
-                     <input onChange={(e)=>sethotelDetails({...hotelDetails,kingPrice:e.target.value})} className="form-control" type="number" placeholder="King Room " />
+                     <input required onChange={(e)=>sethotelDetails({...hotelDetails,kingPrice:e.target.value})} className="form-control" type="number" placeholder="King Room " />
                    </div>
                    </div>
                    <div className="col-sm-3">
                    <div className="form-group">
                      <span className="form-label">Queen  Price</span>
-                     <input onChange={(e)=>sethotelDetails({...hotelDetails,queenPrice:e.target.value})} className="form-control" type="number" placeholder="Queen Room " />
+                     <input required onChange={(e)=>sethotelDetails({...hotelDetails,queenPrice:e.target.value})} className="form-control" type="number" placeholder="Queen Room " />
                    </div>
                    </div>
                    </div>
@@ -85,13 +85,13 @@ const sendData=(e)=>{
                    <div className="col-sm-6">
                    <div className="form-group">
                      <span className="form-label">Location</span>
-                     <input onChange={(e)=>sethotelDetails({...hotelDetails,hotelLocation:e.target.value})} className="form-control" type="text" placeholder="Location" />
+                     <input required onChange={(e)=>sethotelDetails({...hotelDetails,hotelLocation:e.target.value})} className="form-control" type="text" placeholder="Location" />
                    </div>
                    </div>
                    <div className="col-sm-6">
                    <div className="form-group">
                      <span className="form-label">Ratings</span>
-                     <input onChange={(e)=>sethotelDetails({...hotelDetails,hotelRatings:e.target.value})} className="form-control" type="number" placeholder="Ratings" />
+                     <input required onChange={(e)=>sethotelDetails({...hotelDetails,hotelRatings:e.target.value})} className="form-control" type="number" placeholder="Ratings" />
                    </div>
                    </div>
                 
@@ -102,13 +102,13 @@ const sendData=(e)=>{
                      <div className="col-sm-12">
                        <div className="form-group">
                          <span className="form-label">Hotel Image</span>
-                         <input type="file" onChange={(e)=>e.target.files[0]?sethotelDetails({...hotelDetails,hotelImage:e.target.files[0]}):alert("Image not Selected!")} className="form-control"  required />
+                         <input required type="file" onChange={(e)=>e.target.files[0]?sethotelDetails({...hotelDetails,hotelImage:e.target.files[0]}):alert("Image not Selected!")} className="form-control"  required />
                        </div>
                      </div>
                    
                    </div>
                    <div >
-                     <button type="submit" >Add Hotel</button>
+                   <button className="submit-btn" type='submit' >Add Hotel</button>
                    </div>
                  </form>
                </div>
