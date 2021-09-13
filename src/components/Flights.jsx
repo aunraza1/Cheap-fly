@@ -37,19 +37,6 @@ function Flights() {
         console.log(err)
       })
   }, [])
-  // useEffect(()=>{
-  //    axios({
-  //       method: "get",
-  //       url: "https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=KHI&destinationLocationCode=LHE&departureDate=2021-09-06&adults=1&nonStop=false&max=250",
-  //       headers: { "Authorization": `Bearer ${token}` },
-  //   })
-  //   .then((res)=>{
-  //     console.log(res)
-  //   })
-  //   .catch((err)=>{
-  //     console.log(err)
-  //   })
-  // },[origin])
 
 
 
