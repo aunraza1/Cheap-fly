@@ -1,7 +1,11 @@
 import React from 'react'
 import {connect} from 'react-redux'
 import { userBookings } from '../../store/actions'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faUser} from '@fortawesome/free-solid-svg-icons'
 import { useEffect } from 'react'
+import '../../assets/style.css'
+
 
 
 const PendingBookings=({userBookings,bookings,loggedUser})=>{
@@ -21,8 +25,9 @@ useEffect(() => {
     return(
         
          <div className="row">
+      
            
-           { bookings && bookings.map((v,i)=>{
+           { bookings.length>0?  bookings.map((v,i)=>{
                 return(
                     <div style={{marginLeft:15,marginTop:20}} className="card text-center">
                     <div className="card-header">
@@ -40,7 +45,14 @@ useEffect(() => {
                     </div>
                   </div>
                 )
-            })}
+            }):<div style={{flexDirection:'column',justifyContent:'center',height:'calc(100vh - 50px)',alignItems:'center',display:'flex',width:"100%"}}>
+                 
+                  <FontAwesomeIcon style={{height:100,width:100,opacity:0.4}} icon={faUser} color="lightgray" />
+                  <br/>
+                  <h4>No Pending Bookings</h4>
+              
+
+              </div>}
    </div>
       
       

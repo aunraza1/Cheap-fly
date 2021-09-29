@@ -2,6 +2,8 @@ import React from 'react'
 import {connect} from 'react-redux'
 import {venderBookings } from '../../store/actions'
 import { useEffect } from 'react'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faDatabase} from '@fortawesome/free-solid-svg-icons'
 import{Requests,removeRequest} from '../../config/api'
 
 
@@ -27,7 +29,7 @@ useEffect(() => {
         
          <div className="row">
            
-           { allRequests && allRequests.map((v,i)=>{
+           { allRequests.length>0 ? allRequests.map((v,i)=>{
                 return(
                     <div style={{marginLeft:15,marginTop:20}} className="card text-center">
                     <div className="card-header">
@@ -53,7 +55,13 @@ useEffect(() => {
                     </div>
                   </div>
                 )
-            })}
+            }): <div style={{flexDirection:'column',justifyContent:'center',height:'calc(100vh - 50px)',alignItems:'center',display:'flex',width:"100%"}}>
+                 
+                 <FontAwesomeIcon style={{height:100,width:100,opacity:0.4}} icon={faDatabase} color="lightgray" />
+            <br/>
+                 
+            <h4>No Active Request Yet!</h4>
+        </div>}
    </div>
       
       

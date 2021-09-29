@@ -5,6 +5,7 @@ import Tab from '@material-ui/core/Tab';
 import SignUpVendor from './signupVendor';
 import Signup from './signup';
 import {Link} from 'react-router-dom'
+import Logo from '../assets/images/logo-removebg-preview.png'
 
 function SignupTab() {
   const [value, setValue] = React.useState(0);
@@ -14,14 +15,16 @@ function SignupTab() {
   };
   return (
     <>
+
+    
+      <div className="mt-5 mu-logo-area">
+               <Link to="/" className="mu=logo"> 
+              <img height="120"  width="120" src={Logo} />
+              </Link>
+      </div>
       <div id='login-div'>
 
-        <div className="mu-logo-area">
-          {/* text based logo */}
-          <Link to="/" className="mu-logo" ><span>Cheap Fly</span></Link>
-          {/* Image based logo */}
-          {/* <a class="mu-logo" href="index.html"><img src="assets/images/logo.jpg" alt="logo img"></a> */}
-        </div>
+      
         <Paper square >
           <Tabs
             value={value}
