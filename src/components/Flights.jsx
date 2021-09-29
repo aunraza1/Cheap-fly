@@ -16,6 +16,7 @@ function Flights() {
   const [flyingFrom, setFlyingFrom] = useState([]);
   const [show, setShow] = useState(false);
   const [flightData, setFlightData] = useState();
+  const [noFlights, setNoFlights] = useState(false);
   const [flightVal, setFlightVal] = useState({
     flyingFrom: "",
     flyingTo: "",
@@ -77,7 +78,8 @@ function Flights() {
   };
   const checkFlight = (e) => {
     e.preventDefault();
-    setShow(true);
+    setShow(false);
+    setNoFlights(false);
     axios({
       method: "get",
       url: `https://test.api.amadeus.com/v2/shopping/flight-offers?originLocationCode=${
@@ -91,58 +93,64 @@ function Flights() {
     })
       .then((res) => {
         let json = [];
-        res?.data?.data &&
-          res?.data?.data.map((Val, i) => {
-            let departDate = moment(
-              res?.data?.data[i]?.itineraries[0]?.segments[0]?.departure?.at
-            ).format("MMMM Do YYYY, h:mm a");
-            let arrivalDate = moment(
-              res?.data?.data[i]?.itineraries[0]?.segments[0]?.arrival?.at
-            ).format("MMMM Do YYYY, h:mm a");
-            let total = res?.data?.data[i]?.price?.base;
-            let airLine = "";
-            let airlineCode =
-              res?.data?.data[i]?.itineraries[0]?.segments[0]?.carrierCode;
-            for (const [key, value] of Object.entries(
-              res?.data?.dictionaries?.carriers
-            )) {
-              if (key === airlineCode) {
-                airLine = value;
+        if (res?.data?.data.length > 0) {
+          res?.data?.data &&
+            res?.data?.data.map((Val, i) => {
+              let departDate = moment(
+                res?.data?.data[i]?.itineraries[0]?.segments[0]?.departure?.at
+              ).format("MMMM Do YYYY, h:mm a");
+              let arrivalDate = moment(
+                res?.data?.data[i]?.itineraries[0]?.segments[0]?.arrival?.at
+              ).format("MMMM Do YYYY, h:mm a");
+              let total = res?.data?.data[i]?.price?.base;
+              let airLine = "";
+              let airlineCode =
+                res?.data?.data[i]?.itineraries[0]?.segments[0]?.carrierCode;
+              for (const [key, value] of Object.entries(
+                res?.data?.dictionaries?.carriers
+              )) {
+                if (key === airlineCode) {
+                  airLine = value;
+                }
               }
-            }
-            let word = res?.data?.data[i]?.itineraries[0]?.duration;
-            let duration = "";
-            let interval;
-            let hour = "";
-            let minute = "";
-            for (let i = 0; i <= word.length - 1; i++) {
-              if (word.charAt(i) === "H") {
-                hour = word.slice(2, i + 1);
-                interval = i + 1;
+              let word = res?.data?.data[i]?.itineraries[0]?.duration;
+              let duration = "";
+              let interval;
+              let hour = "";
+              let minute = "";
+              for (let i = 0; i <= word.length - 1; i++) {
+                if (word.charAt(i) === "H") {
+                  hour = word.slice(2, i + 1);
+                  interval = i + 1;
+                }
+                if (word.charAt(i) === "M") {
+                  minute = word.slice(interval, i + 1);
+                }
+                duration = hour + " " + minute;
               }
-              if (word.charAt(i) === "M") {
-                minute = word.slice(interval, i + 1);
-              }
-              duration = hour + " " + minute;
-            }
-            json.push({
-              flyingFrom: flightVal?.departure,
-              flyingTo: flightVal?.arrival,
-              adults: flightVal?.adults,
-              child: flightVal?.child,
-              class: flightVal?.class,
-              departDate: departDate,
-              arrivalDate: arrivalDate,
-              total: total,
-              airLine: airLine,
-              duration: duration,
+              json.push({
+                flyingFrom: flightVal?.departure,
+                flyingTo: flightVal?.arrival,
+                adults: flightVal?.adults,
+                child: flightVal?.child,
+                class: flightVal?.class,
+                departDate: departDate,
+                arrivalDate: arrivalDate,
+                total: total,
+                airLine: airLine,
+                duration: duration,
+              });
             });
-          });
-        setResult(res?.data);
-        setFlightData(json);
+          setResult(res?.data);
+          setFlightData(json);
+          setShow(true);
+        } else {
+          setNoFlights(true);
+        }
       })
       .catch((err) => {
         console.log(err);
+        setNoFlights(true);
       });
   };
 
@@ -313,7 +321,7 @@ function Flights() {
                 </div>
               </form>
               {console.log("result", result)}
-              <Collapse in={flightData?.length > 0 ? true : false}>
+              <Collapse in={show}>
                 <div
                   className="row col-12"
                   style={{
@@ -338,6 +346,32 @@ function Flights() {
                         <FlightsCard val={val} />
                       </div>
                     ))}
+                </div>
+              </Collapse>
+              <Collapse in={noFlights}>
+                <div
+                  className="row col-12"
+                  style={{
+                    width: "100%",
+                    backgroundColor: "#F0F0F0",
+                    padding: 10,
+                    margin: 0,
+                    borderRadius: 8,
+                    height: 100,
+                    overflowY: "auto",
+                  }}
+                >
+                  <h1
+                    style={{
+                      color: "black",
+                      fontWeight: "bold",
+                      padding: 0,
+                      textAlign: "center",
+                      marginLeft: "30%",
+                    }}
+                  >
+                    No Flights Found
+                  </h1>
                 </div>
               </Collapse>
             </div>
