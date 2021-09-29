@@ -3,9 +3,13 @@ import Italy from "../assets/images/serene.jpg";
 import Collapse from "@material-ui/core/Collapse";
 import "../assets/style.css";
 import FlightsCard from "./SharedComponent/Flight/FlightsCard";
+import Dialog from "@material-ui/core/Dialog";
 import { autocomplete } from "air-port-codes-node";
 import moment from "moment";
-
+import DialogTitle from "@material-ui/core/DialogTitle";
+import DialogContent from "@material-ui/core/DialogContent";
+import Button from "@material-ui/core/Button";
+import DialogActions from "@material-ui/core/DialogActions";
 import axios from "axios";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import TextField from "@material-ui/core/TextField";
@@ -152,6 +156,9 @@ function Flights() {
         console.log(err);
         setNoFlights(true);
       });
+  };
+  const handleClose = () => {
+    setShow(false);
   };
 
   return (
@@ -321,33 +328,48 @@ function Flights() {
                 </div>
               </form>
               {console.log("result", result)}
-              <Collapse in={show}>
-                <div
-                  className="row col-12"
-                  style={{
-                    width: "100%",
-                    backgroundColor: "#F0F0F0",
-                    padding: 10,
-                    margin: 0,
-                    borderRadius: 8,
-                    height: 500,
-                    overflowY: "auto",
-                  }}
-                >
-                  {flightData &&
-                    flightData.map((val, i) => (
-                      <div key={i}
-                        style={{
-                          width: "100%",
-                          borderRadius: 8,
-                          marginBottom: 10,
-                        }}
-                      >
-                        <FlightsCard val={val} />
-                      </div>
-                    ))}
-                </div>
-              </Collapse>
+              <Dialog
+                open={show}
+                onClose={handleClose}
+                aria-labelledby="form-dialog-title"
+                fullWidth={true}
+                maxWidth={"lg"}
+              >
+                <DialogContent>
+                  <div
+                    className="row col-12"
+                    style={{
+                      width: "100%",
+                      backgroundColor: "#F0F0F0",
+                      padding: 10,
+                      margin: 0,
+                      borderRadius: 8,
+                      height: 500,
+                      overflowY: "auto",
+                    }}
+                  >
+                    {flightData &&
+                      flightData.map((val, i) => (
+                        <div
+                          key={i}
+                          style={{
+                            width: "100%",
+                            borderRadius: 8,
+                            marginBottom: 10,
+                          }}
+                        >
+                          <FlightsCard val={val} />
+                        </div>
+                      ))}
+                  </div>
+                </DialogContent>
+                <DialogActions>
+                  <Button onClick={handleClose} color="primary">
+                    Cancel
+                  </Button>
+                </DialogActions>
+              </Dialog>
+
               <Collapse in={noFlights}>
                 <div
                   className="row col-12"
