@@ -1437,8 +1437,23 @@ iframe {
 	background-size: cover;
 	background-position: center;
 }
+#booking2 {
+	font-family: 'Montserrat', sans-serif;
+	background-image: url('../assets/images/photo-1517840901100-8179e982acb7.jpg');
+	background-size: cover;
+	background-position: center;
+}
 
 #booking::before {
+	content: '';
+	position: absolute;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	top: 0;
+	background: rgba(0, 0, 0, 0.6);
+}
+#booking2::before {
 	content: '';
 	position: absolute;
 	left: 0;

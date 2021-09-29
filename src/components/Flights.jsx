@@ -328,7 +328,7 @@ function Flights() {
                 >
                   {flightData &&
                     flightData.map((val, i) => (
-                      <div
+                      <div key={i}
                         style={{
                           width: "100%",
                           borderRadius: 8,

@@ -32,7 +32,7 @@ const sendData=(e)=>{
     return(
         <>
         <div>
-         <div id="booking" className="section">
+         <div id="booking2" className="section">
          <div className="section-center">
            <div className="container">
              <div className="row">

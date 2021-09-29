@@ -41,7 +41,7 @@ function SignUpVendor(){
         
         <div id="login-box">
         <div className="left">
-        <h1 style={{fontSize: 45, fontWeight: 300}}>User Sign Up</h1>
+        <h1 style={{fontSize: 45, fontWeight: 300}}>Vendor Sign Up</h1>
         <p style={{width: '100%'}}>Welcome! Sign Up to start your new journey</p>
           <input value={userName} onChange={(e)=>setName(e.target.value)} type="text" name="username" required placeholder="Username" />
           <input value ={email}onChange={(e)=>setEmail(e.target.value)} type="text" name="email" required placeholder="E-mail" />
