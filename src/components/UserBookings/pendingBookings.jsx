@@ -16,7 +16,6 @@ const PendingBookings=({userBookings,bookings,loggedUser})=>{
     
 useEffect(() => {
     userBookings(loggedUser)
-    console.log(bookings)
 },[] )
 
 

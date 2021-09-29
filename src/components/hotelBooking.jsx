@@ -77,7 +77,7 @@ function HotelBooking({ getHotelsfromVendors, hotelData, loggedUser, venderData 
       //  },5000)
     }
 
-    console.log(newArray)
+
     setSearchArray(newArray)
 
 
@@ -166,7 +166,6 @@ function HotelBooking({ getHotelsfromVendors, hotelData, loggedUser, venderData 
               <Grid item xs={12} sm={12} md={3} key={i}>
       
                 <Card >
-                  {console.log(v)}
                   <CardActionArea>
                     <CardMedia
                       className={classes.media}

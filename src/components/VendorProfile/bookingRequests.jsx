@@ -16,7 +16,6 @@ const BookingRequests=({allRequests,venderBookings,venderData})=>{
     
 useEffect(() => {
     venderBookings(venderData)
-    console.log(allRequests)
 },[])
 
 

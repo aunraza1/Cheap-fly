@@ -43,7 +43,6 @@ const selectedBooking=(values,ownerId,form)=>{
 
   if(loggedUser!==""){
 
-console.log(form)
     setPress(true)
     setSelectedTour({
       ...selectedTour,tourName:values.tourName,
@@ -130,7 +129,7 @@ applyBooking(selectedTour)
                                 <h4>{v.tourStay}</h4>
                                 <h5 style={{fontWeight:'bold',fontFamily:'cursive'}}>{`Departure Date ${v.tourStartDate}`}</h5>
                                 <span className="mu-price-tag">{`${v.tourPrice}/- PKR`}</span>
-                                <a  onClick={()=>selectedBooking(tourData[i],tourData[i].ownerId,form)} className="mu-book-now-btn btn-success">Book Now</a>
+                                <a style={{backgroundColor:'green'}} onClick={()=>selectedBooking(tourData[i],tourData[i].ownerId,form)} className="mu-book-now-btn btn-success">Book Now</a>
                               </div>
                             </div>
                           

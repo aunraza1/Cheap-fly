@@ -5,7 +5,6 @@ import { useHistory } from "react-router-dom";
 import '../assets/style.css'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { useEffect } from 'react'
 import Dropdown from 'react-bootstrap/Dropdown'
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import PersonIcon from '@material-ui/icons/Person';
@@ -24,13 +23,8 @@ function Header({ reference, click, loggedUser, venderData,removeUser }) {
 
   
 
-  useEffect(() => {
-    console.log("LOGGED_USER", loggedUser)
-    console.log("VENDOR_DATA", venderData)
 
-  })
   const history = useHistory();
-  console.log(click)
   return (
     <>
            <header ref={reference} id="mu-hero">

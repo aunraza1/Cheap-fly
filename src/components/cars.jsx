@@ -75,7 +75,6 @@ function Cars({ getCars, carData, userData, venderData }) {
       //  },5000)
     }
 
-    console.log(newArray)
     setSearchArray(newArray)
 
 

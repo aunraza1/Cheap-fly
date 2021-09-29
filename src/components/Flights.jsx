@@ -45,7 +45,6 @@ function Flights() {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     })
       .then((res) => {
-        console.log(res?.data);
         setToken(res?.data?.access_token);
       })
       .catch((err) => {
@@ -168,7 +167,6 @@ function Flights() {
           <div className="row">
             <div className="booking-forms">
               <form onSubmit={checkFlight}>
-                {console.log(flightVal)}
                 <div className="row" style={{ marginBottom: "3%" }}>
                   <div style={{ width: 300, marginLeft: "3%" }}>
                     <Autocomplete
@@ -327,7 +325,6 @@ function Flights() {
                   </div>
                 </div>
               </form>
-              {console.log("result", result)}
               <Dialog
                 open={show}
                 onClose={handleClose}

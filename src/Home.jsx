@@ -6,20 +6,13 @@ import Video from './components/video'
 import Tours from './components/tours'
 import Clients from './components/clients'
 import {useRef} from 'react'
-import {useEffect} from 'react'
 import {connect} from 'react-redux'
 
 
-function Home({loggedUser,venderData}){
+function Home(){
 
 
-    useEffect(()=>{
-      console.log(headers)
-      console.log("Tours=>",tours)
-      console.log("LOGGED_USER",loggedUser)
-      console.log("VENDER_DATA",venderData)
 
-    })
 
    const scrollToDiv= (ref) =>{
  
