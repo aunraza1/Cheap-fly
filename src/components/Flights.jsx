@@ -69,7 +69,7 @@ function Flights() {
   const onInputChange = (e, value) => {
     axios({
       method: "get",
-      url: `http://autocomplete.travelpayouts.com/places2?term=${value}&locale=en&types[]=city`,
+      url: `https://autocomplete.travelpayouts.com/places2?term=${value}&locale=en&types[]=city`,
     })
       .then((res) => {
         const value = res?.data;
